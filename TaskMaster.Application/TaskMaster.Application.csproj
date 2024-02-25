@@ -1,0 +1,15 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\TaskMaster.Core\TaskMaster.Core.csproj" />
+    <ProjectReference Include="..\TaskMaster.Persistence\TaskMaster.Persistence.csproj" />
+    <ProjectReference Include="..\TaskMaster.Shared\TaskMaster.Shared.csproj" />
+  </ItemGroup>
+
+</Project>
