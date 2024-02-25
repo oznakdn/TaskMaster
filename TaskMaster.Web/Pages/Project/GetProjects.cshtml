@@ -30,6 +30,10 @@
             .filterable .filters input[disabled]:-ms-input-placeholder {
                 color: #333;
             }
+
+    textarea {
+        resize: none;
+    }
 </style>
 
 
@@ -81,54 +85,114 @@
     </div>
 </div>
 
-
-<div class="row my-xl-5" style="display:none" id="createRow">
-    <div class="display-6 text-center">Creating project</div>
+<div class="row" style="display:none" id="createRow">
+    <div class="col-12">
         <form method="post">
-            <div class="form-row">
-                <div class="form-group col-md-6">
-                    <label for="inputEmail4">Name</label>
+            <div class="col-8 offset-2 d-inline-flex">
+                <div class="col-8 form-group">
+                    <span> Name</span>
                     <input asp-for="CreateProject.Name" type="text" class="form-control">
                 </div>
-                <div class="form-group col-md-6 mt-1">
-                    <label class="form-label">Description</label>
-                    <input type="text" asp-for="CreateProject.Description" class="form-control">
+            </div>
+            <div class="col-8 offset-2 d-inline-flex mt-1">
+                <div class="col-4 form-group">
+                    <span> Description</span>
+                    <textarea class="form-control" asp-for="CreateProject.Description" rows="4"></textarea>
+                </div>
+                <div class="col-4 form-group mx-1">
+                    <span> Story</span>
+                    <textarea class="form-control" asp-for="CreateProject.Story" rows="4"></textarea>
                 </div>
             </div>
-            <div class="form-group mt-1">
-                <label class="form-label">Story</label>
-                <input type="text" asp-for="CreateProject.Story" class="form-control">
-            </div>
-            <div class="form-group mt-1 col-md-3">
-                <label class="form-label">Duration</label>
-                <input type="text" asp-for="CreateProject.Duration" class="form-control">
-            </div>
-            <div class="form-row">
-                <div class="form-group mt-1 col-md-6">
-                    <label class="form-label">Starting</label>
-                    <input type="date" asp-for="CreateProject.StartingDate" class="form-control">
+            <div class="col-8 offset-2 d-inline-flex mt-1">
+                <div class="col-4 form-group">
+                    <span> Starting</span>
+                    <input type="date" class="form-control" asp-for="CreateProject.StartingDate">
                 </div>
-                <div class="form-group mt-1 col-md-6">
-                    <label for="inputCity">Finished</label>
-                    <input type="date" asp-for="CreateProject.FinishedDate" class="form-control">
+                <div class="col-4 form-group mx-1">
+                    <span> Duration</span>
+                    <input type="text" class="form-control" asp-for="CreateProject.Duration">
                 </div>
-                <div class="form-group mt-1 col-md-2">
-                    <label class="form-label">Status</label>
+            </div>
+            <div class="col-8 offset-2 d-inline-flex mt-1">
+                <div class="col-4 form-group">
+                    <span> Finished</span>
+                    <input type="date" class="form-control" asp-for="CreateProject.FinishedDate">
+                </div>
+                <div class="col-4 form-group mx-1">
+                    <span> Status</span>
                     <select asp-for="CreateProject.ProjectStatus" asp-items="Html.GetEnumSelectList<TaskMaster.Shared.Dtos.ProjectDtos.StatusDto>()" class="form-control form-select">
-                        <option value="">Choose...</option>
+                        <option value="">Choose..</option>
                     </select>
                 </div>
-                <div class="form-group mt-1 col-md-6">
-                    <label class="form-label">Explation</label>
-                    <input type="text" asp-for="CreateProject.StatusExplation" class="form-control">
+            </div>
+            <div class="col-8 offset-2 d-inline-flex mt-1">
+                <div class="col-8 form-group mx-1">
+                    <span> Explation</span>
+                    <textarea class="form-control" asp-for="CreateProject.StatusExplation" rows="4"></textarea>
                 </div>
-
-                <div class="form-group my-3">
+            </div>
+            <div class="col-8 offset-2 d-inline-flex mt-2">
+                <div class="col-8 form-group">
                     <button type="submit" class="btn btn-primary">Save</button>
                 </div>
             </div>
         </form>
+    </div>
 </div>
+
+
+<!--
+
+<div class="row my-xl-5" @*style="display:none"*@ id="createRow">
+    <div class="display-6 text-center">Creating project</div>
+    <form method="post">
+        <div class="form-row">
+            <div class="form-group col-md-6">
+                <label for="inputEmail4">Name</label>
+                <input asp-for="CreateProject.Name" type="text" class="form-control">
+            </div>
+            <div class="form-group col-md-6 mt-1">
+                <label class="form-label">Description</label>
+                <input type="text" asp-for="CreateProject.Description" class="form-control">
+            </div>
+        </div>
+        <div class="form-group mt-1">
+            <label class="form-label">Story</label>
+            <input type="text" asp-for="CreateProject.Story" class="form-control">
+        </div>
+        <div class="form-group mt-1 col-md-3">
+            <label class="form-label">Duration</label>
+            <input type="text" asp-for="CreateProject.Duration" class="form-control">
+        </div>
+        <div class="form-row">
+            <div class="form-group mt-1 col-md-6">
+                <label class="form-label">Starting</label>
+                <input type="date" asp-for="CreateProject.StartingDate" class="form-control">
+            </div>
+            <div class="form-group mt-1 col-md-6">
+                <label for="inputCity">Finished</label>
+                <input type="date" asp-for="CreateProject.FinishedDate" class="form-control">
+            </div>
+            <div class="form-group mt-1 col-md-2">
+                <label class="form-label">Status</label>
+                <select asp-for="CreateProject.ProjectStatus" asp-items="Html.GetEnumSelectList<TaskMaster.Shared.Dtos.ProjectDtos.StatusDto>()" class="form-control form-select">
+                    <option value="">Choose...</option>
+                </select>
+            </div>
+            <div class="form-group mt-1 col-md-6">
+                <label class="form-label">Explation</label>
+                <input type="text" asp-for="CreateProject.StatusExplation" class="form-control">
+            </div>
+
+            <div class="form-group my-3">
+                <button type="submit" class="btn btn-primary">Save</button>
+            </div>
+        </div>
+    </form>
+</div>
+
+-->
 
 @section Scripts{
 
