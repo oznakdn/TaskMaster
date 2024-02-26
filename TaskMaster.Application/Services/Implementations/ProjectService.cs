@@ -34,6 +34,10 @@ public class ProjectService : IProjectService
         await _repository.Project.CreateProjectAsync(project);
     }
 
+    public async Task DeleteProjectAsync(string id, CancellationToken cancellationToken = default)
+    {
+        await _repository.Project.DeleteProjectAsync(id, cancellationToken);
+    }
 
     public async Task<IEnumerable<ProjectDto>> GetProjectsAsync(Expression<Func<Project, bool>> filter = null, CancellationToken cancellationToken = default)
     {
@@ -73,4 +77,6 @@ public class ProjectService : IProjectService
 
         await _repository.Project.UpdateProjectAsync(project, cancellationToken);
     }
+
+
 }

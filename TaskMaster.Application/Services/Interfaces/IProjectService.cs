@@ -9,5 +9,6 @@ public interface IProjectService
     Task<IEnumerable<ProjectDto>> GetProjectsAsync(Expression<Func<Project, bool>> filter = null, CancellationToken cancellationToken = default(CancellationToken));
     Task CreateProjectAsync(CreateProjectDto projectDto, CancellationToken cancellationToken = default(CancellationToken));
     Task UpdateProjectAsync(UpdateProjectDto projectDto, CancellationToken cancellationToken = default(CancellationToken));
+    Task DeleteProjectAsync(string id, CancellationToken cancellationToken = default(CancellationToken));
 
 }

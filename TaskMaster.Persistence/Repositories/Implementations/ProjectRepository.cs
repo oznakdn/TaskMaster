@@ -18,6 +18,11 @@ public class ProjectRepository : MongoContext<Project>, IProjectRepository
         await Collection.InsertOneAsync(document: project, cancellationToken: cancellationToken);
     }
 
+    public async Task DeleteProjectAsync(string id, CancellationToken cancellationToken = default)
+    {
+        await Collection.FindOneAndDeleteAsync(filter: x => x.Id == id, cancellationToken: cancellationToken);
+    }
+
     public async Task<IEnumerable<Project>> GetProjectsAsync(Expression<Func<Project, bool>> filter = null, CancellationToken cancellationToken = default)
     {
         return filter is not null ? await Collection.Find<Project>(filter: filter).ToListAsync(cancellationToken)

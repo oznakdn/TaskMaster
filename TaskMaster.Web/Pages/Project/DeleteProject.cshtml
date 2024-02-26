@@ -1,0 +1,19 @@
+﻿@page "/delete-project"
+@model TaskMaster.Web.Pages.Project.DeleteProjectModel
+
+
+<div class="row justify-content-center">
+    <div class="col-6 offset-3">
+        <div class="card" style="width: 30rem;">
+            <div class="card-body">
+                <h5 class="card-title"><i class="fa-solid fa-circle-exclamation"></i></h5>
+                <p class="card-text">Are you sure that you would like to delete this project?</p>
+                <form method="post">
+                    <input type="hidden" asp-for="Id" />
+                    <button type="submit" class="btn btn-success text-black"><i class="fa-solid fa-circle-check text-black"></i> Delete</button>
+                    <a asp-page="/Project/GetProjects" class="btn btn-warning text-black"><i class="fa-solid fa-rectangle-xmark text-black"></i> Cancel</a>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
