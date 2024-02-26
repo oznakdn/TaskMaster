@@ -20,7 +20,12 @@ public class ProjectRepository : MongoContext<Project>, IProjectRepository
 
     public async Task<IEnumerable<Project>> GetProjectsAsync(Expression<Func<Project, bool>> filter = null, CancellationToken cancellationToken = default)
     {
-        return filter is null ? await Collection.Find<Project>(filter: filter).ToListAsync(cancellationToken)
+        return filter is not null ? await Collection.Find<Project>(filter: filter).ToListAsync(cancellationToken)
                               : await Collection.Find<Project>(x => true).ToListAsync(cancellationToken);
+    }
+
+    public async Task UpdateProjectAsync(Project project, CancellationToken cancellationToken = default)
+    {
+        await Collection.ReplaceOneAsync(filter: x => x.Id == project.Id, replacement: project, cancellationToken: cancellationToken);
     }
 }

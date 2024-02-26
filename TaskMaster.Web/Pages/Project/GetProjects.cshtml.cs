@@ -12,9 +12,11 @@ public class GetProjectsModel(IServiceManager manager) : PageModel
     [BindProperty]
     public CreateProjectDto CreateProject { get; set; }
 
+   
+
     public async Task OnGetAsync()
     {
-        Projects = await manager.Project.GetProjectsAsync(x => x.IsActive);
+        Projects = await manager.Project.GetProjectsAsync();
     }
 
     public async Task<IActionResult> OnPostAsync()
@@ -23,4 +25,5 @@ public class GetProjectsModel(IServiceManager manager) : PageModel
         return RedirectToPage("/Project/GetProjects");
     }
 
+ 
 }

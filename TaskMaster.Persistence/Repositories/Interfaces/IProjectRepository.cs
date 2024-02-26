@@ -7,5 +7,6 @@ public interface IProjectRepository
 {
     Task<IEnumerable<Project>> GetProjectsAsync(Expression<Func<Project, bool>> filter = null, CancellationToken cancellationToken = default(CancellationToken));
     Task CreateProjectAsync(Project project, CancellationToken cancellationToken = default(CancellationToken));
+    Task UpdateProjectAsync(Project project, CancellationToken cancellationToken = default(CancellationToken));
 
 }

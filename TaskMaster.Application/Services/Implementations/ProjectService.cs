@@ -47,11 +47,30 @@ public class ProjectService : IProjectService
             x.Description,
             x.Story,
             x.Duration,
-            x.StartingDate.ToString(),
-            x.EndingDate.ToString(),
-            x.FinishedDate.ToString(),
+            x.StartingDate,
+            x.EndingDate,
+            x.FinishedDate,
             x.ProjectStatus.ToString(),
             x.StatusExplation!)).ToList();
 
+    }
+
+    public async Task UpdateProjectAsync(UpdateProjectDto projectDto, CancellationToken cancellationToken = default)
+    {
+        var project = new Project
+        {
+            Id = projectDto.Id,
+            Name = projectDto.Name,
+            Story = projectDto.Story,
+            Description = projectDto.Description,
+            Duration = projectDto.Duration,
+            FinishedDate = projectDto.FinishedDate,
+            IsActive = projectDto.IsActive,
+            StartingDate = projectDto.StartingDate,
+            StatusExplation = projectDto.StatusExplation,
+            ProjectStatus = (TaskMaster.Core.Enums.ProjectStatus)projectDto.ProjectStatus
+        };
+
+        await _repository.Project.UpdateProjectAsync(project, cancellationToken);
     }
 }
