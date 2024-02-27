@@ -10,7 +10,7 @@
                             <a class="btn btn-outline-info btn-sm" href="@Model.Project.Repo" target="_blank"><i class="fa-brands fa-github-alt text-black"></i><span class="text-black"> Repo</span></a>
                         </li>
                         <li class="nav-item">
-                            <a class="btn btn-outline-warning btn-sm mx-2" href="@Model.Project.Repo"><i class="fa-solid fa-sitemap text-black"></i><span class="text-black"> Tasks</span></a>
+                            <a class="btn btn-outline-warning btn-sm mx-2" asp-route-id="@Model.Project.Id" asp-page="/ProjectTask/GetProjectTasks"><i class="fa-solid fa-sitemap text-black"></i><span class="text-black"> Tasks</span></a>
                         </li>
                         <li class="nav-item">
                             <a class="btn btn-outline-danger btn-sm" href="@Model.Project.Repo"><i class="fa-solid fa-question text-black"></i><span class="text-black"> Issues</span></a>

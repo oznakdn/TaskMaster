@@ -21,4 +21,7 @@ public class Project : ModelBase
     [BsonIgnore]
     public List<ProjectTask> Tasks { get; set; } = new();
 
+    [BsonIgnore]
+    public List<Issue> Issues { get; set; } = new();
+
 }

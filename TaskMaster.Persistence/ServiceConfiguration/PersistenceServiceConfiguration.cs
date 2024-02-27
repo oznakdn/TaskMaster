@@ -16,6 +16,7 @@ public static class PersistenceServiceConfiguration
         service.AddSingleton<IMongoOption>(sp => sp.GetRequiredService<IOptions<MongoOption>>().Value);
 
         service.AddScoped<IProjectRepository, ProjectRepository>();
+        service.AddScoped<ITaskRepository, TaskRepository>();
         service.AddScoped<IRepositoryManager, RepositoryManager>();
 
     }

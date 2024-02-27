@@ -13,6 +13,7 @@ public static class ApplicationServiceConfiguration
     {
         services.AddPersistenceService(configuration);
         services.AddTransient<IProjectService, ProjectService>();
+        services.AddTransient<ITaskService, TaskService>();
         services.AddScoped<IServiceManager, ServiceManager>();
     }
 }

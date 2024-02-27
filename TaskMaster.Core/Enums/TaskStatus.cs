@@ -1,6 +1,6 @@
 ﻿namespace TaskMaster.Core.Enums;
 
-public enum TaskStatus
+public enum ProjectTaskStatus
 {
     NotStarted, // Henuz baslamadi
     Active, // Aktif

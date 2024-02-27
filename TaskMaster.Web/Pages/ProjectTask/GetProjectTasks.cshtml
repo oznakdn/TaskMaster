@@ -1,5 +1,6 @@
-﻿@page "projects"
-@model TaskMaster.Web.Pages.Project.GetProjectsModel
+﻿@page "project-tasks"
+@model TaskMaster.Web.Pages.ProjectTask.GetProjectTasksModel
+
 
 <style>
     .filterable {
@@ -40,16 +41,18 @@
 <div class="row">
     <div class="panel panel-primary filterable">
         <div class="panel-heading">
-            <h3 class="panel-title text-center display-6">Projects</h3>
+            <h3 class="panel-title text-center display-6">Tasks</h3>
             <div class="pull-right my-3 text-start">
                 <button class="btn btn-secondary btn-sm btn-filter"><span class="glyphicon glyphicon-filter"></span><i class="fa-solid fa-filter"></i></button>
                 <button id="createButton" class="btn btn-secondary btn-sm text-end mx-2"><span class="glyphicon glyphicon-filter"></span><i class="fa-solid fa-square-plus"></i></button>
+ 
             </div>
         </div>
         <table class="table table-bordered text-black">
             <thead>
                 <tr class="filters bg-secondary">
-                    <th><input type="text" class="form-control" placeholder="Name" disabled></th>
+                    <th><input type="text" class="form-control" placeholder="Title" disabled></th>
+                    <th><input type="text" class="form-control" placeholder="Priority" disabled></th>
                     <th><input type="text" class="form-control" placeholder="Starting" disabled></th>
                     <th><input type="text" class="form-control" placeholder="Duration" disabled></th>
                     <th><input type="text" class="form-control" placeholder="Ending" disabled></th>
@@ -59,46 +62,66 @@
                 </tr>
             </thead>
             <tbody>
-                @foreach (var item in Model.Projects)
+                @foreach (var item in Model.Tasks)
                 {
                     if (item.IsActive)
                     {
                         <tr class="bg-primary">
-                            <td>@item.Name</td>
-                            <td>@item.StartingDate!.Value.ToShortTimeString()</td>
+                            <td>@item.Title</td>
+                            @if (item.PriorityLevel == "High")
+                            {
+                                <td class="bg-danger">@item.PriorityLevel</td>
+                            }
+                            else if (item.PriorityLevel == "Medium")
+                            {
+                                <td class="bg-danger">@item.PriorityLevel</td>
+                            }
+                            else
+                            {
+                                <td class="bg-success">@item.PriorityLevel</td>
+                            }
+                            <td>@item.StartingDate!.Value.ToShortDateString()</td>
                             <td>@item.Duration day</td>
-                            <td>@item.EndingDate!.Value.ToShortTimeString()</td>
-                            <td>@item.Status</td>
+                            <td>@item.EndingDate!.Value.ToShortDateString()</td>
+                            <td>@item.TaskStatus</td>
                             <td>@item.StatusExplation</td>
                             <td>
                                 <a asp-page="/Project/UpdateProject" asp-route-id="@item.Id"><i class="fa-solid fa-pen-to-square text-black"></i></a>
                                 <a asp-page="/Project/DeleteProject" asp-route-id="@item.Id"><i class="fa-solid fa-trash text-black mx-1"></i></a>
                                 <a asp-page="/Project/GetProjectDetails" asp-route-id="@item.Id"><i class="fa-solid fa-circle-info text-black"></i></a>
-                                <a asp-page="/ProjectTask/GetProjectTasks" asp-route-id="@item.Id"><i class="fa-solid fa-sitemap text-black"></i></a>
-                                <a asp-page="/ProjectIssue/GetProjectIssues" asp-route-id="@item.Id"><i class="fa-solid fa-question text-black"></i></a>
+
                             </td>
                         </tr>
                     }
                     else
                     {
                         <tr class="bg-danger">
-                            <td>@item.Name</td>
+                            <td>@item.Title</td>
+                            @if (item.PriorityLevel == "High")
+                            {
+                                <td class="bg-danger">@item.PriorityLevel</td>
+                            }
+                            else if (item.PriorityLevel == "Medium")
+                            {
+                                <td class="bg-danger">@item.PriorityLevel</td>
+                            }
+                            else
+                            {
+                                <td class="bg-success">@item.PriorityLevel</td>
+                            }
                             <td>@item.StartingDate!.Value.ToShortTimeString()</td>
                             <td>@item.Duration day</td>
                             <td>@item.EndingDate!.Value.ToShortTimeString()</td>
-                            <td>@item.Status</td>
+                            <td>@item.TaskStatus</td>
                             <td>@item.StatusExplation</td>
                             <td>
                                 <a asp-page="/Project/UpdateProject" asp-route-id="@item.Id"><i class="fa-solid fa-pen-to-square text-black"></i></a>
                                 <a asp-page="/Project/DeleteProject" asp-route-id="@item.Id"><i class="fa-solid fa-trash text-black mx-1"></i></a>
                                 <a asp-page="/Project/GetProjectDetails" asp-route-id="@item.Id"><i class="fa-solid fa-circle-info text-black"></i></a>
-                                <a asp-page="/ProjectTask/GetProjectTasks" asp-route-id="@item.Id"><i class="fa-solid fa-sitemap text-black"></i></a>
-                                <a asp-page="/ProjectIssue/GetProjectIssues" asp-route-id="@item.Id"><i class="fa-solid fa-question text-black"></i></a>
+
                             </td>
                         </tr>
                     }
-
-
                 }
 
             </tbody>
@@ -106,57 +129,57 @@
     </div>
 </div>
 
+<!--Create-->
 <div class="row" style="display:none" id="createRow">
     <div class="col-12">
         <form method="post">
+            <input type="hidden" asp-for="CreateTask.ProjectId"  />
             <div class="col-8 offset-2 d-inline-flex">
                 <div class="col-8 form-group">
-                    <span> Name</span>
-                    <input asp-for="CreateProject.Name" type="text" class="form-control">
-                </div>
-            </div>
-            <div class="col-8 offset-2 d-inline-flex">
-                <div class="col-8 form-group">
-                    <span> Repo</span>
-                    <input asp-for="CreateProject.Repo" type="text" class="form-control">
+                    <span> Title</span>
+                    <input asp-for="CreateTask.Title" type="text" class="form-control">
                 </div>
             </div>
             <div class="col-8 offset-2 d-inline-flex mt-1">
                 <div class="col-4 form-group">
                     <span> Description</span>
-                    <textarea class="form-control" asp-for="CreateProject.Description" rows="3"></textarea>
-                </div>
-                <div class="col-4 form-group mx-1">
-                    <span> Story</span>
-                    <textarea class="form-control" asp-for="CreateProject.Story" rows="3"></textarea>
+                    <textarea class="form-control" asp-for="CreateTask.Description" rows="3"></textarea>
                 </div>
             </div>
             <div class="col-8 offset-2 d-inline-flex mt-1">
-                <div class="col-4 form-group">
-                    <span> Starting</span>
-                    <input type="date" class="form-control" asp-for="CreateProject.StartingDate">
-                </div>
-                <div class="col-4 form-group mx-1">
-                    <span> Duration</span>
-                    <input type="text" class="form-control" asp-for="CreateProject.Duration">
-                </div>
-            </div>
-            <div class="col-8 offset-2 d-inline-flex mt-1">
-                <div class="col-4 form-group">
-                    <span> Finished</span>
-                    <input type="date" class="form-control" asp-for="CreateProject.FinishedDate">
-                </div>
                 <div class="col-4 form-group mx-1">
                     <span> Status</span>
-                    <select asp-for="CreateProject.ProjectStatus" asp-items="Html.GetEnumSelectList<TaskMaster.Shared.Dtos.ProjectDtos.StatusDto>()" class="form-control form-select">
+                    <select asp-for="CreateTask.TaskStatus" asp-items="Html.GetEnumSelectList<TaskMaster.Shared.Dtos.TaskDtos.TaskStatusDto>()" class="form-control form-select">
+                        <option value="">Choose..</option>
+                    </select>
+                </div>
+                <div class="col-4 form-group mx-1">
+                    <span> Priority</span>
+                    <select asp-for="CreateTask.PriorityLevel" asp-items="Html.GetEnumSelectList<TaskMaster.Shared.Dtos.TaskDtos.PriorityLevelDto>()" class="form-control form-select">
                         <option value="">Choose..</option>
                     </select>
                 </div>
             </div>
             <div class="col-8 offset-2 d-inline-flex mt-1">
+                <div class="col-4 form-group">
+                    <span> Starting</span>
+                    <input type="date" class="form-control" asp-for="CreateTask.StartingDate">
+                </div>
+                <div class="col-4 form-group mx-1">
+                    <span> Duration</span>
+                    <input type="text" class="form-control" asp-for="CreateTask.Duration">
+                </div>
+            </div>
+            <div class="col-8 offset-2 d-inline-flex mt-1">
+                <div class="col-4 form-group">
+                    <span> Finished</span>
+                    <input type="date" class="form-control" asp-for="CreateTask.FinishedDate">
+                </div>
+            </div>
+            <div class="col-8 offset-2 d-inline-flex mt-1">
                 <div class="col-8 form-group mx-1">
                     <span> Explation</span>
-                    <textarea class="form-control" asp-for="CreateProject.StatusExplation" rows="3"></textarea>
+                    <textarea class="form-control" asp-for="CreateTask.StatusExplation" rows="3"></textarea>
                 </div>
             </div>
             <div class="col-8 offset-2 text-center mt-2">
@@ -168,8 +191,6 @@
         </form>
     </div>
 </div>
-
-
 
 
 @section Scripts{

@@ -1,5 +1,4 @@
-﻿using MongoDB.Bson.Serialization.Attributes;
-using TaskMaster.Core.Abstracts;
+﻿using TaskMaster.Core.Abstracts;
 using TaskMaster.Core.Enums;
 
 namespace TaskMaster.Core.Models;
@@ -15,11 +14,7 @@ public class ProjectTask : ModelBase
     public DateTime? EndingDate => StartingDate!.Value.AddDays(Duration);
     public DateTime? FinishedDate { get; set; }
 
-    public Enums.TaskStatus TaskStatus { get; set; } = Enums.TaskStatus.NotStarted;
+    public Enums.ProjectTaskStatus TaskStatus { get; set; } = Enums.ProjectTaskStatus.NotStarted;
     public string? StatusExplation { get; set; }
-
-
-    [BsonIgnore]
-    public List<Issue> Issues { get; set; } = new();
 
 }

@@ -5,4 +5,5 @@ namespace TaskMaster.Application.Manager;
 public interface IServiceManager
 {
     IProjectService Project { get;}
+    ITaskService Task { get; }
 }

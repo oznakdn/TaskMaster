@@ -5,4 +5,6 @@ namespace TaskMaster.Persistence.Manager;
 public interface IRepositoryManager
 {
     IProjectRepository Project { get; }
+    ITaskRepository Task { get; }
+
 }
