@@ -31,17 +31,17 @@ public class ProjectService : IProjectService
             StatusExplation = projectDto.StatusExplation
         };
 
-        await _repository.Project.CreateProjectAsync(project);
+        await _repository.Project.CreateAsync(project);
     }
 
     public async Task DeleteProjectAsync(string id, CancellationToken cancellationToken = default)
     {
-        await _repository.Project.DeleteProjectAsync(id, cancellationToken);
+        await _repository.Project.DeleteAsync(id, cancellationToken);
     }
 
     public async Task<IEnumerable<ProjectDto>> GetProjectsAsync(Expression<Func<Project, bool>> filter = null, CancellationToken cancellationToken = default)
     {
-        var projects = await _repository.Project.GetProjectsAsync(filter, cancellationToken);
+        var projects = await _repository.Project.GetAllAsync(filter, cancellationToken);
 
 
         return projects.Select(x => new ProjectDto(
@@ -76,7 +76,7 @@ public class ProjectService : IProjectService
             ProjectStatus = (TaskMaster.Core.Enums.ProjectStatus)projectDto.ProjectStatus
         };
 
-        await _repository.Project.UpdateProjectAsync(project, cancellationToken);
+        await _repository.Project.UpdateAsync(project, cancellationToken);
     }
 
 

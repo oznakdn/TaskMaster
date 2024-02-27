@@ -32,7 +32,7 @@ public class ProjectRepositoryTests
         await _collection.InsertManyAsync(projects);
 
         // Act
-        var result = await _projectRepository.GetProjectsAsync();
+        var result = await _projectRepository.GetAllAsync();
 
         // Assert
         Assert.Equal(projects, result);
@@ -49,7 +49,7 @@ public class ProjectRepositoryTests
         await _collection.InsertManyAsync(projects);
 
         // Act
-        var result = await _projectRepository.GetProjectsAsync(p => p.Name.StartsWith("Project"));
+        var result = await _projectRepository.GetAllAsync(p => p.Name.StartsWith("Project"));
 
         // Assert
         Assert.Equal(new List<Project> { project1, project2 }, result);

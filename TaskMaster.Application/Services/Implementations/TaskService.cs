@@ -3,7 +3,6 @@ using TaskMaster.Application.Services.Interfaces;
 using TaskMaster.Core.Enums;
 using TaskMaster.Core.Models;
 using TaskMaster.Persistence.Manager;
-using TaskMaster.Shared.Dtos.ProjectDtos;
 using TaskMaster.Shared.Dtos.TaskDtos;
 
 namespace TaskMaster.Application.Services.Implementations;
@@ -32,12 +31,12 @@ public class TaskService : ITaskService
             StatusExplation = createTaskDto.StatusExplation
         };
 
-        await _manager.Task.CreateTaskAsync(projectTask, cancellationToken);
+        await _manager.Task.CreateAsync(projectTask, cancellationToken);
     }
 
     public async Task<IEnumerable<TaskDto>> GetTasksAsync(Expression<Func<ProjectTask, bool>> filter = null, CancellationToken cancellationToken = default)
     {
-        var tasks = await _manager.Task.GetTasksAsync(filter, cancellationToken);
+        var tasks = await _manager.Task.GetAllAsync(filter, cancellationToken);
 
 
         return tasks.Select(x => new TaskDto(
@@ -58,7 +57,7 @@ public class TaskService : ITaskService
 
     public async Task<IEnumerable<TaskDto>> GetTasksByProjectId(string projectId, CancellationToken cancellationToken = default)
     {
-        var projectTasks = await _manager.Task.GetTasksByProjectId(projectId, cancellationToken);
+        var projectTasks = await _manager.Task.GetAllAsync(filter: x => x.ProjectId == projectId, cancellationToken);
 
         return projectTasks.Select(x => new TaskDto(
             x.Id,
@@ -93,6 +92,6 @@ public class TaskService : ITaskService
             StatusExplation = updateTaskDto.StatusExplation ?? default!
         };
 
-        await _manager.Task.UpdateTaskAsync(projectTask, cancellationToken);
+        await _manager.Task.UpdateAsync(projectTask, cancellationToken);
     }
 }
