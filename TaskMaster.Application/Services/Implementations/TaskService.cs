@@ -34,6 +34,11 @@ public class TaskService : ITaskService
         await _manager.Task.CreateAsync(projectTask, cancellationToken);
     }
 
+    public async Task DeleteTaskAsync(string id, CancellationToken cancellationToken = default)
+    {
+        await _manager.Task.DeleteAsync(id, cancellationToken);
+    }
+
     public async Task<IEnumerable<TaskDto>> GetTasksAsync(Expression<Func<ProjectTask, bool>> filter = null, CancellationToken cancellationToken = default)
     {
         var tasks = await _manager.Task.GetAllAsync(filter, cancellationToken);
