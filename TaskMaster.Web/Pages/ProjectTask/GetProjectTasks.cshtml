@@ -45,7 +45,7 @@
             <div class="pull-right my-3 text-start">
                 <button class="btn btn-secondary btn-sm btn-filter"><span class="glyphicon glyphicon-filter"></span><i class="fa-solid fa-filter"></i></button>
                 <button id="createButton" class="btn btn-secondary btn-sm text-end mx-2"><span class="glyphicon glyphicon-filter"></span><i class="fa-solid fa-square-plus"></i></button>
- 
+
             </div>
         </div>
         <table class="table table-bordered text-black">
@@ -86,9 +86,9 @@
                             <td>@item.TaskStatus</td>
                             <td>@item.StatusExplation</td>
                             <td>
-                                <a asp-page="/Project/UpdateProject" asp-route-id="@item.Id"><i class="fa-solid fa-pen-to-square text-black"></i></a>
-                                <a asp-page="/Project/DeleteProject" asp-route-id="@item.Id"><i class="fa-solid fa-trash text-black mx-1"></i></a>
-                                <a asp-page="/Project/GetProjectDetails" asp-route-id="@item.Id"><i class="fa-solid fa-circle-info text-black"></i></a>
+                                <a asp-page="/ProjectTask/UpdateTask" asp-route-id="@item.Id"><i class="fa-solid fa-pen-to-square text-black"></i></a>
+                                <a asp-page="/ProjectTask/DeleteProject" asp-route-id="@item.Id"><i class="fa-solid fa-trash text-black mx-1"></i></a>
+                                <a asp-page="/ProjectTask/GetProjectDetails" asp-route-id="@item.Id"><i class="fa-solid fa-circle-info text-black"></i></a>
 
                             </td>
                         </tr>
@@ -115,9 +115,9 @@
                             <td>@item.TaskStatus</td>
                             <td>@item.StatusExplation</td>
                             <td>
-                                <a asp-page="/Project/UpdateProject" asp-route-id="@item.Id"><i class="fa-solid fa-pen-to-square text-black"></i></a>
-                                <a asp-page="/Project/DeleteProject" asp-route-id="@item.Id"><i class="fa-solid fa-trash text-black mx-1"></i></a>
-                                <a asp-page="/Project/GetProjectDetails" asp-route-id="@item.Id"><i class="fa-solid fa-circle-info text-black"></i></a>
+                                <a asp-page="/ProjectTask/UpdateTask" asp-route-id="@item.Id"><i class="fa-solid fa-pen-to-square text-black"></i></a>
+                                <a asp-page="/ProjectTask/DeleteProject" asp-route-id="@item.Id"><i class="fa-solid fa-trash text-black mx-1"></i></a>
+                                <a asp-page="/ProjectTask/GetProjectDetails" asp-route-id="@item.Id"><i class="fa-solid fa-circle-info text-black"></i></a>
 
                             </td>
                         </tr>
@@ -133,7 +133,7 @@
 <div class="row" style="display:none" id="createRow">
     <div class="col-12">
         <form method="post">
-            <input type="hidden" asp-for="CreateTask.ProjectId"  />
+            <input type="hidden" asp-for="CreateTask.ProjectId" />
             <div class="col-8 offset-2 d-inline-flex">
                 <div class="col-8 form-group">
                     <span> Title</span>

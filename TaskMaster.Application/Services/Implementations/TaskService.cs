@@ -1,7 +1,9 @@
-﻿using TaskMaster.Application.Services.Interfaces;
+﻿using System.Linq.Expressions;
+using TaskMaster.Application.Services.Interfaces;
 using TaskMaster.Core.Enums;
 using TaskMaster.Core.Models;
 using TaskMaster.Persistence.Manager;
+using TaskMaster.Shared.Dtos.ProjectDtos;
 using TaskMaster.Shared.Dtos.TaskDtos;
 
 namespace TaskMaster.Application.Services.Implementations;
@@ -30,15 +32,17 @@ public class TaskService : ITaskService
             StatusExplation = createTaskDto.StatusExplation
         };
 
-        await _manager.Task.CreateTaskAsync(projectTask,cancellationToken);
+        await _manager.Task.CreateTaskAsync(projectTask, cancellationToken);
     }
 
-    public async Task<IEnumerable<TaskDto>> GetTasksByProjectId(string projectId, CancellationToken cancellationToken = default)
+    public async Task<IEnumerable<TaskDto>> GetTasksAsync(Expression<Func<ProjectTask, bool>> filter = null, CancellationToken cancellationToken = default)
     {
-        var projectTasks = await _manager.Task.GetTasksByProjectId(projectId, cancellationToken);
+        var tasks = await _manager.Task.GetTasksAsync(filter, cancellationToken);
 
-        return projectTasks.Select(x => new TaskDto(
+
+        return tasks.Select(x => new TaskDto(
             x.Id,
+            x.ProjectId,
             x.Title,
             x.Description,
             x.PriorityLevel.ToString(),
@@ -50,5 +54,45 @@ public class TaskService : ITaskService
             x.StatusExplation,
             x.IsActive
             )).ToList();
+    }
+
+    public async Task<IEnumerable<TaskDto>> GetTasksByProjectId(string projectId, CancellationToken cancellationToken = default)
+    {
+        var projectTasks = await _manager.Task.GetTasksByProjectId(projectId, cancellationToken);
+
+        return projectTasks.Select(x => new TaskDto(
+            x.Id,
+            x.ProjectId,
+            x.Title,
+            x.Description,
+            x.PriorityLevel.ToString(),
+            x.Duration,
+            x.StartingDate,
+            x.EndingDate,
+            x.FinishedDate,
+            x.TaskStatus.ToString(),
+            x.StatusExplation,
+            x.IsActive
+            )).ToList();
+    }
+
+    public async Task UpdateTaskAsync(UpdateTaskDto updateTaskDto, CancellationToken cancellationToken = default)
+    {
+        var projectTask = new ProjectTask
+        {
+            Id = updateTaskDto.Id,
+            ProjectId = updateTaskDto.ProjectId ?? default!,
+            Title = updateTaskDto.Title ?? default!,
+            Description = updateTaskDto.Description ?? default!,
+            Duration = updateTaskDto.Duration,
+            IsActive = updateTaskDto.IsActive,
+            FinishedDate = updateTaskDto.FinishedDate ?? default!,
+            StartingDate = updateTaskDto.StartingDate ?? default!,
+            PriorityLevel = (PriorityLevel)updateTaskDto.PriorityLevel,
+            TaskStatus = (ProjectTaskStatus)updateTaskDto.TaskStatus,
+            StatusExplation = updateTaskDto.StatusExplation ?? default!
+        };
+
+        await _manager.Task.UpdateTaskAsync(projectTask, cancellationToken);
     }
 }
