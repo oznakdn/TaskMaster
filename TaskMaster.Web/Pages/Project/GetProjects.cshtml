@@ -50,12 +50,9 @@
             <thead>
                 <tr class="filters bg-secondary">
                     <th><input type="text" class="form-control" placeholder="Name" disabled></th>
-                    <th><input type="text" class="form-control" placeholder="Description" disabled></th>
-                    <th><input type="text" class="form-control" placeholder="Story" disabled></th>
                     <th><input type="text" class="form-control" placeholder="Starting" disabled></th>
                     <th><input type="text" class="form-control" placeholder="Duration" disabled></th>
                     <th><input type="text" class="form-control" placeholder="Ending" disabled></th>
-                    @*<th><input type="text" class="form-control" placeholder="Finished" disabled></th>*@
                     <th><input type="text" class="form-control" placeholder="Status" disabled></th>
                     <th><input type="text" class="form-control" placeholder="Explation" disabled></th>
                     <th>ACTIONS</th>
@@ -68,17 +65,15 @@
                     {
                         <tr class="bg-primary">
                             <td>@item.Name</td>
-                            <td>@item.Description</td>
-                            <td>@item.Story</td>
                             <td>@item.StartingDate</td>
                             <td>@item.Duration day</td>
                             <td>@item.EndingDate</td>
-                            @*<td>@item.FinishedDate</td>*@
                             <td>@item.Status</td>
                             <td>@item.StatusExplation</td>
                             <td>
-                                <a asp-page="/Project/UpdateProject" asp-route-id="@item.Id"><i class="fa-solid fa-pen-to-square text-black"></i></a>
-                                <a asp-page="/Project/DeleteProject" asp-route-id="@item.Id"><i class="fa-solid fa-trash text-black my-1"></i></a>
+                                <a asp-page="/Project/UpdateProject"  asp-route-id="@item.Id"><i class="fa-solid fa-pen-to-square text-black"></i></a>
+                                <a asp-page="/Project/DeleteProject"  asp-route-id="@item.Id"><i class="fa-solid fa-trash text-black mx-1"></i></a>
+                                <a asp-page="/Project/GetProjectDetails"  asp-route-id="@item.Id"><i class="fa-solid fa-circle-info text-black"></i></a>
 
                             </td>
                         </tr>
@@ -87,17 +82,15 @@
                     {
                         <tr class="bg-danger">
                             <td>@item.Name</td>
-                            <td>@item.Description</td>
-                            <td>@item.Story</td>
                             <td>@item.StartingDate</td>
                             <td>@item.Duration day</td>
                             <td>@item.EndingDate</td>
-                            @*<td>@item.FinishedDate</td>*@
                             <td>@item.Status</td>
                             <td>@item.StatusExplation</td>
                             <td>
                                 <a asp-page="/Project/UpdateProject" asp-route-id="@item.Id"><i class="fa-solid fa-pen-to-square text-black"></i></a>
-                                <a asp-page="/Project/DeleteProject" asp-route-id="@item.Id"><i class="fa-solid fa-trash text-black my-1"></i></a>
+                                <a asp-page="/Project/DeleteProject" asp-route-id="@item.Id"><i class="fa-solid fa-trash text-black mx-1"></i></a>
+                                <a asp-page="/Project/GetProjectDetails" asp-route-id="@item.Id"><i class="fa-solid fa-circle-info text-black"></i></a>
 
 
                             </td>
@@ -121,14 +114,20 @@
                     <input asp-for="CreateProject.Name" type="text" class="form-control">
                 </div>
             </div>
+            <div class="col-8 offset-2 d-inline-flex">
+                <div class="col-8 form-group">
+                    <span> Repo</span>
+                    <input asp-for="CreateProject.Repo" type="text" class="form-control">
+                </div>
+            </div>
             <div class="col-8 offset-2 d-inline-flex mt-1">
                 <div class="col-4 form-group">
                     <span> Description</span>
-                    <textarea class="form-control" asp-for="CreateProject.Description" rows="4"></textarea>
+                    <textarea class="form-control" asp-for="CreateProject.Description" rows="3"></textarea>
                 </div>
                 <div class="col-4 form-group mx-1">
                     <span> Story</span>
-                    <textarea class="form-control" asp-for="CreateProject.Story" rows="4"></textarea>
+                    <textarea class="form-control" asp-for="CreateProject.Story" rows="3"></textarea>
                 </div>
             </div>
             <div class="col-8 offset-2 d-inline-flex mt-1">
@@ -156,12 +155,13 @@
             <div class="col-8 offset-2 d-inline-flex mt-1">
                 <div class="col-8 form-group mx-1">
                     <span> Explation</span>
-                    <textarea class="form-control" asp-for="CreateProject.StatusExplation" rows="4"></textarea>
+                    <textarea class="form-control" asp-for="CreateProject.StatusExplation" rows="3"></textarea>
                 </div>
             </div>
-            <div class="col-8 offset-2 d-inline-flex mt-2">
+            <div class="col-8 offset-2 text-center mt-2">
                 <div class="col-8 form-group">
-                    <button type="submit" class="btn btn-primary">Save</button>
+                    <button type="submit" class="btn btn-success btn-sm"><i class="fa-solid fa-floppy-disk"></i> Save</button>
+                    <button id="cancelButton" type="button" class="btn btn-warning btn-sm mx-3"><i class="fa-solid fa-rectangle-xmark"></i> Cancel</button>
                 </div>
             </div>
         </form>
@@ -224,6 +224,10 @@
         $(document).ready(() => {
 
             $("#createButton").click(() => {
+                $("#createRow").toggle(1000);
+            });
+
+            $("#cancelButton").click(() => {
                 $("#createRow").toggle(1000);
             });
         });

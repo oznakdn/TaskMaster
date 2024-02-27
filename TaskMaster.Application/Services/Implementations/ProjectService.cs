@@ -50,6 +50,7 @@ public class ProjectService : IProjectService
             x.Name,
             x.Description,
             x.Story,
+            x.Repo,
             x.Duration,
             x.StartingDate,
             x.EndingDate,

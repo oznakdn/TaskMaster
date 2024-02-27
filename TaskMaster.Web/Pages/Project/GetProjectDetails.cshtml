@@ -1,0 +1,33 @@
+﻿@page "project-details"
+@model TaskMaster.Web.Pages.Project.GetProjectDetailsModel
+
+    <div class="row justify-content-center mt-lg-5">
+        <div class="col-8 offset-2">
+            <div class="card text-center">
+                <div class="card-header">
+                    <ul class="nav nav-pills card-header-pills">
+                        <li class="nav-item">
+                            <a class="btn btn-outline-info btn-sm" href="@Model.Project.Repo" target="_blank"><i class="fa-brands fa-github-alt text-black"></i><span class="text-black"> Repo</span></a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="btn btn-outline-warning btn-sm mx-2" href="@Model.Project.Repo"><i class="fa-solid fa-sitemap text-black"></i><span class="text-black"> Tasks</span></a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="btn btn-outline-danger btn-sm" href="@Model.Project.Repo"><i class="fa-solid fa-question text-black"></i><span class="text-black"> Issues</span></a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="card-body">
+                    <h5 class="card-title">@Model.Project.Name</h5>
+                    <p class="card-text text-start"><span class="text-primary">Status: </span>@Model.Project.Status</p>
+                    <p class="card-text text-start"><span class="text-primary">Explation: </span>@Model.Project.StatusExplation</p>
+                    <p class="card-text text-start"><span class="text-primary">Description: </span>@Model.Project.Description</p>
+                    <p class="card-text text-start"><span class="text-primary">Story: </span>@Model.Project.Story</p>
+                    <span class="text-primary text-start">Starting: </span>@Model.Project.StartingDate!.Value.ToShortDateString() -
+                    <span class="text-primary text-end">Ending: </span>@Model.Project.EndingDate!.Value.ToShortDateString() -
+                    <span class="text-primary text-start">Duration: </span>@Model.Project.Duration.ToString() Day - 
+                    <span class="text-danger text-start">Remaining: </span>@((Model.Project.EndingDate - DateTime.Now).Value.TotalDays.ToString("##")) Day
+                </div>
+            </div>
+        </div>
+    </div>

@@ -19,6 +19,7 @@ public class UpdateProjectModel(IServiceManager manager) : PageModel
         UpdateProject.Name = project!.Name;
         UpdateProject.Description = project!.Description;
         UpdateProject.Story = project!.Story;
+        UpdateProject.Repo = project!.Repo;
         UpdateProject.Duration = project!.Duration;
         UpdateProject.StartingDate = project!.StartingDate;
         UpdateProject.FinishedDate = project!.FinishedDate;

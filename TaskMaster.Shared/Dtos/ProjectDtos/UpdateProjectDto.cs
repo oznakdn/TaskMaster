@@ -6,6 +6,7 @@ public class UpdateProjectDto
     public string Name { get; set; }
     public string? Description { get; set; }
     public string? Story { get; set; }
+    public string? Repo { get; set; }
     public int Duration { get; set; }
     public DateTime? StartingDate { get; set; }
     public DateTime? FinishedDate { get; set; }
