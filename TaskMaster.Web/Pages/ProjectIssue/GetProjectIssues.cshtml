@@ -39,7 +39,7 @@
 <div class="row">
     <div class="panel panel-primary filterable">
         <div class="panel-heading">
-            <h3 class="panel-title text-center display-6">Issues</h3>
+            <h3 class="panel-title text-center display-6">@Model.ProjectName's Issues</h3>
             <div class="pull-right my-3 text-start">
                 <button class="btn btn-secondary btn-sm btn-filter"><span class="glyphicon glyphicon-filter"></span><i class="fa-solid fa-filter"></i></button>
                 <button id="createButton" class="btn btn-secondary btn-sm text-end mx-2"><span class="glyphicon glyphicon-filter"></span><i class="fa-solid fa-square-plus"></i></button>
@@ -52,7 +52,6 @@
                     <th><input type="text" class="form-control" placeholder="Name" disabled></th>
                     <th><input type="text" class="form-control" placeholder="Priority" disabled></th>
                     <th><input type="text" class="form-control" placeholder="Starting" disabled></th>
-                    <th><input type="text" class="form-control" placeholder="Ending" disabled></th>
                     <th><input type="text" class="form-control" placeholder="Status" disabled></th>
                     <th><input type="text" class="form-control" placeholder="Explation" disabled></th>
                     <th>ACTIONS</th>
@@ -71,19 +70,18 @@
                             }
                             else if (item.PriorityLevel == "Medium")
                             {
-                                <td class="bg-danger">@item.PriorityLevel</td>
+                                <td class="bg-warning">@item.PriorityLevel</td>
                             }
                             else
                             {
                                 <td class="bg-success">@item.PriorityLevel</td>
                             }
                             <td>@item.StartingDate!.Value.ToShortDateString()</td>
-                            <td>@item.EndingDate!.Value.ToShortDateString()</td>
                             <td>@item.IssueStatus</td>
                             <td>@item.StatusExplation</td>
                             <td>
                                 @*<a asp-page="/ProjectTask/UpdateTask" asp-route-id="@item.Id"><i class="fa-solid fa-pen-to-square text-black"></i></a>
-                                <a asp-page="/ProjectTask/DeleteTask" asp-route-id="@item.Id"><i class="fa-solid fa-trash text-black mx-1"></i></a>*@
+                                    <a asp-page="/ProjectTask/DeleteTask" asp-route-id="@item.Id"><i class="fa-solid fa-trash text-black mx-1"></i></a>*@
                                 <a asp-page="/ProjectTask/GetTaskDetails" asp-route-id="@item.Id"><i class="fa-solid fa-circle-info text-black"></i></a>
                             </td>
                         </tr>
@@ -105,12 +103,11 @@
                                 <td class="bg-success">@item.PriorityLevel</td>
                             }
                             <td>@item.StartingDate!.Value.ToShortDateString()</td>
-                            <td>@item.EndingDate!.Value.ToShortDateString()</td>
                             <td>@item.IssueStatus</td>
                             <td>@item.StatusExplation</td>
                             <td>
                                 @*<a asp-page="/ProjectTask/UpdateTask" asp-route-id="@item.Id"><i class="fa-solid fa-pen-to-square text-black"></i></a>
-                                <a asp-page="/ProjectTask/DeleteTask" asp-route-id="@item.Id"><i class="fa-solid fa-trash text-black mx-1"></i></a>*@
+                                    <a asp-page="/ProjectTask/DeleteTask" asp-route-id="@item.Id"><i class="fa-solid fa-trash text-black mx-1"></i></a>*@
                                 <a asp-page="/ProjectTask/GetTaskDetails" asp-route-id="@item.Id"><i class="fa-solid fa-circle-info text-black"></i></a>
                             </td>
                         </tr>
@@ -122,6 +119,65 @@
     </div>
 </div>
 
+
+<!--Create-->
+<div class="row" style="display:none" id="createRow">
+    <div class="col-12">
+        <form method="post">
+            @*<input type="hidden" asp-for="CreateIssue.ProjectId" />*@
+            <div class="col-8 offset-2 d-inline-flex">
+                <div class="col-8 form-group">
+                    <span> Title</span>
+                    <input asp-for="CreateIssue.Name" type="text" class="form-control">
+                </div>
+            </div>
+            <div class="col-8 offset-2 d-inline-flex mt-1">
+                <div class="col-4 form-group">
+                    <span> Description</span>
+                    <textarea class="form-control" asp-for="CreateIssue.Description" rows="3"></textarea>
+                </div>
+            </div>
+            <div class="col-8 offset-2 d-inline-flex mt-1">
+                <div class="col-4 form-group mx-1">
+                    <span> Status</span>
+                    <select asp-for="CreateIssue.IssueStatus" asp-items="Html.GetEnumSelectList<TaskMaster.Shared.Dtos.TaskDtos.TaskStatusDto>()" class="form-control form-select">
+                        <option value="">Choose..</option>
+                    </select>
+                </div>
+                <div class="col-4 form-group mx-1">
+                    <span> Priority</span>
+                    <select asp-for="CreateIssue.PriorityLevel" asp-items="Html.GetEnumSelectList<TaskMaster.Shared.Dtos.TaskDtos.PriorityLevelDto>()" class="form-control form-select">
+                        <option value="">Choose..</option>
+                    </select>
+                </div>
+            </div>
+            <div class="col-8 offset-2 d-inline-flex mt-1">
+                <div class="col-4 form-group">
+                    <span> Starting</span>
+                    <input type="date" class="form-control" asp-for="CreateIssue.StartingDate">
+                </div>
+            </div>
+            <div class="col-8 offset-2 d-inline-flex mt-1">
+                <div class="col-4 form-group">
+                    <span> Finished</span>
+                    <input type="date" class="form-control" asp-for="CreateIssue.FinishedDate">
+                </div>
+            </div>
+            <div class="col-8 offset-2 d-inline-flex mt-1">
+                <div class="col-8 form-group mx-1">
+                    <span> Explation</span>
+                    <textarea class="form-control" asp-for="CreateIssue.StatusExplation" rows="3"></textarea>
+                </div>
+            </div>
+            <div class="col-8 offset-2 text-center mt-2">
+                <div class="col-8 form-group">
+                    <button type="submit" class="btn btn-success btn-sm"><i class="fa-solid fa-floppy-disk"></i> Save</button>
+                    <a class="btn btn-warning btn-sm mx-3"><i class="fa-solid fa-rectangle-xmark"></i><span> Back</span></a>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
 
 @section Scripts{
 

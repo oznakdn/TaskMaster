@@ -10,9 +10,8 @@ public class ProjectIssue : ModelBase
     public string? Description { get; set; }
     public PriorityLevel PriorityLevel { get; set; } = PriorityLevel.Medium;
     public DateTime? StartingDate { get; set; }
-    public DateTime? EndingDate { get; set; }
     public DateTime? FinishedDate { get; set; }
-    public Enums.ProjectTaskStatus IssueStatus { get; set; } = Enums.ProjectTaskStatus.NotStarted;
+    public ProjectTaskStatus IssueStatus { get; set; } = Enums.ProjectTaskStatus.NotStarted;
     public string? StatusExplation { get; set; }
 
 }

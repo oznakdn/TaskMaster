@@ -40,6 +40,24 @@ public class ProjectService : IProjectService
         await _repository.Project.DeleteAsync(id, cancellationToken);
     }
 
+    public async Task<ProjectDto> GetProjectByIdAsync(string id, CancellationToken cancellationToken = default)
+    {
+        var project = await _repository.Project.GetAsync(x => x.Id == id, cancellationToken);
+        return new ProjectDto(
+            project.Id,
+            project.IsActive,
+            project.Name,
+            project.Description,
+            project.Story,
+            project.Repo,
+            project.Duration,
+            project.StartingDate,
+            project.EndingDate,
+            project.FinishedDate,
+            project.ProjectStatus.ToString(),
+            project.StatusExplation!);
+    }
+
     public async Task<IEnumerable<ProjectDto>> GetProjectsAsync(Expression<Func<Project, bool>> filter = null, CancellationToken cancellationToken = default)
     {
         var projects = await _repository.Project.GetAllAsync(filter, cancellationToken);

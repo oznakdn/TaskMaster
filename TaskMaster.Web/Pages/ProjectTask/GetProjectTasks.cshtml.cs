@@ -14,9 +14,13 @@ public class GetProjectTasksModel(IServiceManager manager) : PageModel
 
     [BindProperty]
     public string Id { get; set; }
+    public string ProjectName { get; set; }
+
     public async Task OnGetAsync(string id)
     {
         Id = id;
+        var project = await manager.Project.GetProjectByIdAsync(id);
+        ProjectName = project.Name;
         Tasks = await manager.Task.GetTasksByProjectId(id);
     }
 
@@ -24,6 +28,6 @@ public class GetProjectTasksModel(IServiceManager manager) : PageModel
     {
         CreateTask.ProjectId = Id;
         await manager.Task.CreateTaskAsync(CreateTask, default!);
-        return RedirectToPage("/ProjectTask/GetProjectTasks");
+        return RedirectToPage("/ProjectTask/GetProjectTasks", new { id= Id});
     }
 }

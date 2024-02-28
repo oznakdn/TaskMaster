@@ -5,4 +5,6 @@ namespace TaskMaster.Application.Services.Interfaces;
 public interface IIssueService
 {
     Task<IEnumerable<IssueDto>>GetIssuesByProjectId(string projectId, CancellationToken cancellationToken = default(CancellationToken));
+    Task CreateIssueAsync(CreateIssueDto createIssueDto, CancellationToken cancellationToken = default(CancellationToken));
+
 }
