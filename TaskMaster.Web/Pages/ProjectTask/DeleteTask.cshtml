@@ -10,7 +10,7 @@
                 <form method="post">
                     <input type="hidden" asp-for="Id" />
                     <button type="submit" class="btn btn-success text-black"><i class="fa-solid fa-circle-check text-black"></i> Delete</button>
-                    <a asp-page="/ProjectTask/GetProjectTasks" asp-route-id="@TempData["projectId"]" class="btn btn-warning text-black"><i class="fa-solid fa-rectangle-xmark text-black"></i><Span> Back</Span></a>
+                    <a asp-page="/ProjectTask/GetProjectTasks" asp-route-id="@TempData["projectId"]" class="btn btn-warning text-black"><i class="fa-solid fa-backward"></i><Span> Back</Span></a>
                 </form>
             </div>
         </div>

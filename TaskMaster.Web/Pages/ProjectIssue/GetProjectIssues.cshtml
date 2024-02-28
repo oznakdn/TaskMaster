@@ -43,7 +43,7 @@
             <div class="pull-right my-3 text-start">
                 <button class="btn btn-secondary btn-sm btn-filter"><span class="glyphicon glyphicon-filter"></span><i class="fa-solid fa-filter"></i></button>
                 <button id="createButton" class="btn btn-secondary btn-sm text-end mx-2"><span class="glyphicon glyphicon-filter"></span><i class="fa-solid fa-square-plus"></i></button>
-
+                <a class="btn btn-warning btn-sm text-black" asp-page="/Project/GetProjectDetails" asp-route-id="@TempData["projectId"]"><i class="fa-solid fa-backward"></i><span> Back</span></a>
             </div>
         </div>
         <table class="table table-bordered text-black">
@@ -80,9 +80,9 @@
                             <td>@item.IssueStatus</td>
                             <td>@item.StatusExplation</td>
                             <td>
-                                @*<a asp-page="/ProjectTask/UpdateTask" asp-route-id="@item.Id"><i class="fa-solid fa-pen-to-square text-black"></i></a>
-                                    <a asp-page="/ProjectTask/DeleteTask" asp-route-id="@item.Id"><i class="fa-solid fa-trash text-black mx-1"></i></a>*@
-                                <a asp-page="/ProjectTask/GetTaskDetails" asp-route-id="@item.Id"><i class="fa-solid fa-circle-info text-black"></i></a>
+                                <a asp-page="/ProjectIssue/UpdateIssue" asp-route-id="@item.Id"><i class="fa-solid fa-pen-to-square text-black"></i></a>
+                                <a asp-page="/ProjectIssue/DeleteIssue" asp-route-id="@item.Id"><i class="fa-solid fa-trash text-black mx-1"></i></a>
+                                <a asp-page="/ProjectIssue/GetIssueDetails" asp-route-id="@item.Id"><i class="fa-solid fa-circle-info text-black"></i></a>
                             </td>
                         </tr>
                     }
@@ -106,9 +106,9 @@
                             <td>@item.IssueStatus</td>
                             <td>@item.StatusExplation</td>
                             <td>
-                                @*<a asp-page="/ProjectTask/UpdateTask" asp-route-id="@item.Id"><i class="fa-solid fa-pen-to-square text-black"></i></a>
-                                    <a asp-page="/ProjectTask/DeleteTask" asp-route-id="@item.Id"><i class="fa-solid fa-trash text-black mx-1"></i></a>*@
-                                <a asp-page="/ProjectTask/GetTaskDetails" asp-route-id="@item.Id"><i class="fa-solid fa-circle-info text-black"></i></a>
+                                <a asp-page="/ProjectIssue/UpdateIssue" asp-route-id="@item.Id"><i class="fa-solid fa-pen-to-square text-black"></i></a>
+                                <a asp-page="/ProjectIssue/DeleteIssue" asp-route-id="@item.Id"><i class="fa-solid fa-trash text-black mx-1"></i></a>
+                                <a asp-page="/ProjectIssue/GetIssueDetails" asp-route-id="@item.Id"><i class="fa-solid fa-circle-info text-black"></i></a>
                             </td>
                         </tr>
                     }
