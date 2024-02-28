@@ -13,7 +13,7 @@
                             <a class="btn btn-outline-warning btn-sm mx-2" asp-route-id="@Model.Project.Id" asp-page="/ProjectTask/GetProjectTasks"><i class="fa-solid fa-sitemap text-black"></i><span class="text-black"> Tasks</span></a>
                         </li>
                         <li class="nav-item">
-                            <a class="btn btn-outline-danger btn-sm" href="@Model.Project.Repo"><i class="fa-solid fa-question text-black"></i><span class="text-black"> Issues</span></a>
+                            <a class="btn btn-outline-danger btn-sm" asp-route-id="@Model.Project.Id" asp-page="/ProjectIssue/GetProjectIssues"><i class="fa-solid fa-question text-black"></i><span class="text-black"> Issues</span></a>
                         </li>
                     </ul>
                 </div>

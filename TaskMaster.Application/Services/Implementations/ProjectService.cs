@@ -22,6 +22,7 @@ public class ProjectService : IProjectService
         var project = new Project
         {
             Name = projectDto.Name,
+            Repo = projectDto.Repo,
             Description = projectDto.Description,
             Story = projectDto.Story,
             Duration = projectDto.Duration,
@@ -67,6 +68,7 @@ public class ProjectService : IProjectService
             Id = projectDto.Id,
             Name = projectDto.Name,
             Story = projectDto.Story,
+            Repo = projectDto.Repo,
             Description = projectDto.Description,
             Duration = projectDto.Duration,
             FinishedDate = projectDto.FinishedDate,
