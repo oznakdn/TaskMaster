@@ -12,8 +12,10 @@ public static class ApplicationServiceConfiguration
     public static void AddApplicationService(this IServiceCollection services, IConfiguration configuration)
     {
         services.AddPersistenceService(configuration);
-        services.AddTransient<IProjectService, ProjectService>();
-        services.AddTransient<ITaskService, TaskService>();
+        services.AddScoped<IProjectService, ProjectService>();
+        services.AddScoped<ITaskService, TaskService>();
+        services.AddScoped<IIssueService,IssueService>();
         services.AddScoped<IServiceManager, ServiceManager>();
+
     }
 }

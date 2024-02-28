@@ -6,4 +6,6 @@ public interface IServiceManager
 {
     IProjectService Project { get;}
     ITaskService Task { get; }
+    IIssueService Issue {get;}
+    
 }

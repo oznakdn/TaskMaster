@@ -18,6 +18,7 @@ public static class PersistenceServiceConfiguration
         service.AddScoped<IProjectRepository, ProjectRepository>();
         service.AddScoped<ITaskRepository, TaskRepository>();
         service.AddScoped<IRepositoryManager, RepositoryManager>();
+        service.AddScoped<IProjectIssueRepository, ProjectIssueRepository>();
 
     }
 }

@@ -1,8 +1,9 @@
-﻿using TaskMaster.Core.Enums;
+﻿using TaskMaster.Core.Abstracts;
+using TaskMaster.Core.Enums;
 
 namespace TaskMaster.Core.Models;
 
-public class Issue
+public class ProjectIssue : ModelBase
 {
     public string ProjectId { get; set; }
     public string Name { get; set; }

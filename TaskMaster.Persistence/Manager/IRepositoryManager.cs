@@ -6,5 +6,6 @@ public interface IRepositoryManager
 {
     IProjectRepository Project { get; }
     ITaskRepository Task { get; }
+    IProjectIssueRepository Issue {get;}
 
 }
