@@ -39,6 +39,11 @@ public abstract class MongoContext<T> : IMongoContext<T>
                               : await Collection.Find<T>(x => true).ToListAsync(cancellationToken);
     }
 
+    public async Task<T> GetAsync(Expression<Func<T, bool>> filter, CancellationToken cancellationToken = default)
+    {
+        return await Collection.Find(filter: filter).SingleOrDefaultAsync(cancellationToken);
+    }
+
     public async Task CreateAsync(T document, CancellationToken cancellationToken = default(CancellationToken))
     {
         await Collection.InsertOneAsync(document: document, cancellationToken: cancellationToken);
@@ -53,6 +58,8 @@ public abstract class MongoContext<T> : IMongoContext<T>
     {
         await Collection.FindOneAndDeleteAsync(filter: x => x.Id == id, cancellationToken: cancellationToken);
     }
+
+   
 }
 
 

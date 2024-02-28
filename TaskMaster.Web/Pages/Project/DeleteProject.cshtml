@@ -10,8 +10,8 @@
                 <p class="card-text">Are you sure that you would like to delete this project?</p>
                 <form method="post">
                     <input type="hidden" asp-for="Id" />
-                    <button type="submit" class="btn btn-success text-black"><i class="fa-solid fa-circle-check text-black"></i> Delete</button>
-                    <a asp-page="/Project/GetProjects" class="btn btn-warning text-black"><i class="fa-solid fa-rectangle-xmark text-black"></i> Cancel</a>
+                    <button type="submit" class="btn btn-success text-black btn-sm"><i class="fa-solid fa-circle-check text-black"></i><span> Delete</span></button>
+                    <a asp-page="/Project/GetProjects" class="btn btn-warning text-black btn-sm"><i class="fa-solid fa-rectangle-xmark text-black"></i><span> Back</span></a>
                 </form>
             </div>
         </div>

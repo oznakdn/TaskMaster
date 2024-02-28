@@ -3,10 +3,10 @@
 
 
 <div class="row justify-content-center">
-    <div class="display-6 text-center">Update</div>
+    <div class="display-6 text-center">Update Project</div>
 </div>
 <div class="row justify-content-center">
-    <div class="col-12">
+    <div class="col">
         <form method="post">
             <input type="hidden" asp-for="UpdateProject.Id" />
 
@@ -75,8 +75,8 @@
             </div>
             <div class="col-8 offset-2 mt-2">
                 <div class="col-8 form-group">
-                    <button type="submit" class="btn btn-primary text-black"><i class="fa-solid fa-floppy-disk text-black"></i> Save</button>
-                    <a asp-page="/Project/GetProjects" class="btn btn-warning"><i class="fa-solid fa-rectangle-xmark text-black"></i> Cancel</a>
+                    <button type="submit" class="btn btn-success text-black btn-sm"><i class="fa-solid fa-floppy-disk text-black"></i><span> Save</span></button>
+                    <a asp-page="/Project/GetProjects" class="btn btn-warning btn-sm mx-1"><i class="fa-solid fa-rectangle-xmark text-black"></i><span> Back</span></a>
                 </div>
             </div>
         </form>
