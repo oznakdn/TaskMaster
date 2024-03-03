@@ -1,5 +1,4 @@
 ﻿using System.Linq.Expressions;
-using System.Threading;
 using TaskMaster.Application.Services.Interfaces;
 using TaskMaster.Core.Enums;
 using TaskMaster.Core.Models;
@@ -101,22 +100,19 @@ public class TaskService : ITaskService
 
     public async Task UpdateTaskAsync(UpdateTaskDto updateTaskDto, CancellationToken cancellationToken = default)
     {
-        var projectTask = new ProjectTask
-        {
-            Id = updateTaskDto.Id,
-            ProjectId = updateTaskDto.ProjectId ?? default!,
-            Title = updateTaskDto.Title ?? default!,
-            Description = updateTaskDto.Description ?? default!,
-            Duration = updateTaskDto.Duration,
-            IsActive = updateTaskDto.IsActive,
-            FinishedDate = updateTaskDto.FinishedDate ?? default!,
-            StartingDate = updateTaskDto.StartingDate ?? default!,
-            PriorityLevel = (PriorityLevel)updateTaskDto.PriorityLevel,
-            TaskStatus = (ProjectTaskStatus)updateTaskDto.TaskStatus,
-            StatusExplation = updateTaskDto.StatusExplation ?? default!
-        };
+        var task = await _manager.Task.GetAsync(x => x.Id == updateTaskDto.Id, cancellationToken);
 
-        await _manager.Task.UpdateAsync(projectTask, cancellationToken);
+        task.Title = updateTaskDto.Title;
+        task.Description = updateTaskDto.Description;
+        task.Duration = updateTaskDto.Duration;
+        task.FinishedDate = updateTaskDto.FinishedDate;
+        task.StartingDate = updateTaskDto.StartingDate;
+        task.PriorityLevel = (PriorityLevel)updateTaskDto.PriorityLevel;
+        task.TaskStatus =(ProjectTaskStatus)updateTaskDto.TaskStatus;
+        task.StatusExplation = updateTaskDto.StatusExplation;
+        task.IsActive = updateTaskDto.IsActive;
+
+        await _manager.Task.UpdateAsync(task, cancellationToken);
     }
 
     public async Task<string> UpdateTaskStatusAsync(string id, string taskStatus, CancellationToken cancellationToken = default)

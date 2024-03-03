@@ -9,18 +9,14 @@ public class UpdateTaskModel(IServiceManager manager) : PageModel
 {
     [BindProperty]
     public UpdateTaskDto UpdateTask { get; set; } = new();
-
-    [BindProperty]
     public string ProjectId { get; set; }
     public async Task OnGetAsync(string id)
     {
+        var task = await manager.Task.GetTaskById(id);
+        ProjectId = task.ProjectId;
+        TempData["projectId"] = ProjectId;
         UpdateTask.Id = id;
-        var tasks = await manager.Task.GetTasksAsync(filter: null!, default!);
-        var task = tasks.SingleOrDefault(x => x.Id == id);
-        ProjectId = task!.ProjectId;
-
         UpdateTask.Title = task!.Title;
-        UpdateTask.ProjectId = ProjectId;
         UpdateTask.Description = task!.Description;
         UpdateTask.Duration = task!.Duration;
         UpdateTask.StartingDate = task!.StartingDate;
@@ -33,8 +29,8 @@ public class UpdateTaskModel(IServiceManager manager) : PageModel
 
     public async Task<IActionResult> OnPostAsync()
     {
-        UpdateTask.ProjectId = ProjectId;
+        
         await manager.Task.UpdateTaskAsync(UpdateTask, default!);
-        return RedirectToPage("/ProjectTask/GetProjectTasks",new { id = ProjectId });
+        return RedirectToPage("/ProjectTask/GetProjectTasks", new { id = TempData["projectId"] });
     }
 }
