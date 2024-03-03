@@ -21,6 +21,12 @@ public enum PriorityLevelDto
     High, Medium, Low
 }
 
+public enum ResolutionStatusDto
+{
+    Unresolved,
+    Fixed
+}
+
 public enum TaskStatusDto
 {
     ToDo,

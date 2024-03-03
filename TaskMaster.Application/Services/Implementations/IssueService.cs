@@ -20,13 +20,11 @@ public class IssueService : IIssueService
         var projectIssue = new ProjectIssue
         {
             ProjectId = createIssueDto.ProjectId,
-            Description = createIssueDto.Description,
-            Name = createIssueDto.Name,
+            Summary = createIssueDto.Summary,
             StartingDate = createIssueDto.StartingDate,
-            FinishedDate = createIssueDto.FinishedDate,
-            IssueStatus = (ProjectTaskStatus)createIssueDto.IssueStatus,
             PriorityLevel = (PriorityLevel)createIssueDto.PriorityLevel,
-            StatusExplation = createIssueDto.StatusExplation
+            ResolutionStatus = (ResolutionStatus)createIssueDto.ResolutionStatus,
+            Comment = createIssueDto.Comment
         };
 
         await _manager.Issue.CreateAsync(projectIssue, cancellationToken);
@@ -39,13 +37,12 @@ public class IssueService : IIssueService
         return issues.Select(x => new IssueDto(
             x.Id,
             x.ProjectId,
-            x.Name,
-            x.Description,
+            x.Summary,
             x.PriorityLevel.ToString(),
             x.StartingDate,
-            x.FinishedDate,
-            x.IssueStatus.ToString(),
-            x.StatusExplation,
+            x.FixedDate,
+            x.ResolutionStatus.ToString(),
+            x.Comment,
             x.IsActive
             )).ToList();
 
