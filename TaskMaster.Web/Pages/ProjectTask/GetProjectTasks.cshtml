@@ -3,54 +3,111 @@
 
 <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" rel="stylesheet" />
 
-<style>
-    .filterable {
-        margin-top: 15px;
-    }
 
-        .filterable .panel-heading .pull-right {
-            margin-top: -20px;
-        }
-
-        .filterable .filters input[disabled] {
-            background-color: transparent;
-            border: none;
-            cursor: auto;
-            box-shadow: none;
-            padding: 0;
-            height: auto;
-        }
-
-            .filterable .filters input[disabled]::-webkit-input-placeholder {
-                color: #333;
-            }
-
-            .filterable .filters input[disabled]::-moz-placeholder {
-                color: #333;
-            }
-
-            .filterable .filters input[disabled]:-ms-input-placeholder {
-                color: #333;
-            }
-
-    textarea {
-        resize: none;
-    }
-</style>
 
 
 <div class="row justify-content-start">
     <div class="col-3">
-        <button id="createButton" class="btn btn-secondary btn-sm text-end mx-2"><span class="glyphicon glyphicon-filter"></span><i class="fa-solid fa-square-plus"></i></button>
+        <button id="createButton" data-bs-toggle="modal" data-bs-target="#exampleModal" class="btn btn-secondary btn-sm text-end mx-2"><span class="glyphicon glyphicon-filter"></span><i class="fa-solid fa-square-plus"></i></button>
     </div>
 </div>
 
+
+<!--Creating-->
+
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Creating Task</h5>
+                <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col">
+                        <form method="post">
+                            <input type="hidden" asp-for="CreateTask.ProjectId" />
+
+                            <div class="col-12 form-group">
+                                <span> Title</span>
+                                <input asp-for="CreateTask.Title" type="text" class="form-control">
+                            </div>
+
+                            <div class="col-12 form-group">
+                                <span> Description</span>
+                                <input asp-for="CreateTask.Description" type="text" class="form-control">
+                            </div>
+
+                            <div class="col-12 d-inline-flex">
+                                <div class="col-6 form-group">
+                                    <span> Status</span>
+                                    <select asp-for="CreateTask.TaskStatus" asp-items="Html.GetEnumSelectList<TaskMaster.Shared.Dtos.TaskDtos.TaskStatusDto>()" class="form-control form-select">
+                                        <option value="">Choose..</option>
+                                    </select>
+                                </div>
+                                <div class="col-6 form-group">
+                                    <span> Priority</span>
+                                    <select asp-for="CreateTask.PriorityLevel" asp-items="Html.GetEnumSelectList<TaskMaster.Shared.Dtos.TaskDtos.PriorityLevelDto>()" class="form-control form-select">
+                                        <option value="">Choose..</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="col-12 d-inline-flex">
+                                <div class="col-4 form-group">
+                                    <span> Starting</span>
+                                    <input type="date" class="form-control" asp-for="CreateTask.StartingDate">
+                                </div>
+                                <div class="col-4 form-group">
+                                    <span> Duration</span>
+                                    <input type="text" class="form-control" asp-for="CreateTask.Duration">
+                                </div>
+                                <div class="col-4 form-group">
+                                    <span> Finished</span>
+                                    <input type="date" class="form-control" asp-for="CreateTask.FinishedDate">
+                                </div>
+                            </div>
+                            <div class="col-12 form-group">
+
+                                <span> Explation</span>
+                                <textarea class="form-control" asp-for="CreateTask.StatusExplation" rows="3"></textarea>
+
+                            </div>
+                            <div class="col-12 form-group">
+
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                <button type="submit" class="btn btn-primary"><i class="fa-solid fa-floppy-disk"></i> Save</button>
+
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--Reading-->
+
+<div class="row my-4">
+    <div class="text-center">
+        <span class="fw-bold">Priority: </span>
+        <span class="badge badge-pill badge-danger">High</span>
+        <span class="badge badge-pill badge-primary">Low</span>
+        <span class="badge badge-pill badge-warning">Medium</span>
+    </div>
+</div>
 
 <div class="row d-flex mx-1">
     <div class="col">
         <div class="text-center text-warning my-1 fw-bold">ToDo</div>
         <hr />
-        
+
         @foreach (var item in Model.Tasks)
         {
             <div class="card col my-2">
@@ -58,27 +115,27 @@
                 {
 
                     <div class="card-body">
-                        <h5 class="card-title">@item.Title</h5>
-                        <h6 class="card-subtitle mb-2 text-muted">@item.Description</h6>
-
                         @if (item.PriorityLevel == Core.Enums.PriorityLevel.High.ToString())
                         {
-                            <span class="badge badge-pill badge-danger">@item.PriorityLevel</span>
+                            <span class="badge badge-pill badge-danger">   </span>
                         }
                         else if (item.PriorityLevel == Core.Enums.PriorityLevel.Low.ToString())
                         {
-                            <span class="badge badge-pill badge-primary">@item.PriorityLevel</span>
+                            <span class="badge badge-pill badge-primary">   </span>
                         }
                         else
                         {
-                            <span class="badge badge-pill badge-warning">@item.PriorityLevel</span>
+                            <span class="badge badge-pill badge-warning">   </span>
                         }
+                        <h5 class="card-title">@item.Title</h5>
+                        <h6 class="card-subtitle mb-2 text-muted">@item.Description</h6>
+                        <a asp-page="/Project/UpdateProject" asp-route-id="@item.Id"><i class="fa-solid fa-pen-to-square text-black"></i></a>
 
                         <hr />
-                        <form method="post" asp-page-handler="Update">
+                        <form method="post">
                             <input type="hidden" name="taskStatus" value="Progress" />
-                            <button type="submit" class="btn btn-primary btn-sm" asp-route-taskId="@item.Id" asp-page-handler="Update">
-                                 <i class="fa-solid fa-arrow-right"></i>
+                            <button type="submit" class="btn btn-primary btn-sm d-inline-flex" asp-route-taskId="@item.Id" asp-page-handler="UpdateTaskStatus">
+                                <i class="fa-solid fa-arrow-right"></i>
                             </button>
                         </form>
 
@@ -97,31 +154,32 @@
                 {
 
                     <div class="card-body">
-                        <h5 class="card-title">@item.Title</h5>
-                        <h6 class="card-subtitle mb-2 text-muted">@item.Description</h6>
-
                         @if (item.PriorityLevel == Core.Enums.PriorityLevel.High.ToString())
                         {
-                            <span class="badge badge-pill badge-danger">@item.PriorityLevel</span>
+                            <span class="badge badge-pill badge-danger">   </span>
                         }
                         else if (item.PriorityLevel == Core.Enums.PriorityLevel.Low.ToString())
                         {
-                            <span class="badge badge-pill badge-primary">@item.PriorityLevel</span>
+                            <span class="badge badge-pill badge-primary">   </span>
                         }
                         else
                         {
-                            <span class="badge badge-pill badge-warning">@item.PriorityLevel</span>
+                            <span class="badge badge-pill badge-warning">   </span>
                         }
+                        <h5 class="card-title">@item.Title</h5>
+                        <h6 class="card-subtitle mb-2 text-muted">@item.Description</h6>
+                        <a asp-page="/Project/UpdateProject" asp-route-id="@item.Id"><i class="fa-solid fa-pen-to-square text-black"></i></a>
+
                         <hr />
-                        <form method="post" asp-page-handler="Update">
+                        <form method="post">
                             <input type="hidden" name="taskStatus" value="ToDo" />
-                            <button type="submit" class="btn btn-warning btn-sm" asp-route-taskId="@item.Id" asp-page-handler="Update">
+                            <button type="submit" class="btn btn-warning btn-sm d-inline-flex" asp-route-taskId="@item.Id" asp-page-handler="UpdateTaskStatus">
                                 <i class="fa-solid fa-arrow-left"></i>
                             </button>
                         </form>
-                        <form method="post" asp-page-handler="Update">
+                        <form method="post">
                             <input type="hidden" name="taskStatus" value="Review" />
-                            <button type="submit" class="btn btn-danger btn-sm" asp-route-taskId="@item.Id" asp-page-handler="Update">
+                            <button type="submit" class="btn btn-danger btn-sm d-inline-flex" asp-route-taskId="@item.Id" asp-page-handler="UpdateTaskStatus">
                                 <i class="fa-solid fa-arrow-right"></i>
                             </button>
                         </form>
@@ -142,33 +200,37 @@
                 {
 
                     <div class="card-body">
-                        <h5 class="card-title">@item.Title</h5>
-                        <h6 class="card-subtitle mb-2 text-muted">@item.Description</h6>
-
                         @if (item.PriorityLevel == Core.Enums.PriorityLevel.High.ToString())
                         {
-                            <span class="badge badge-pill badge-danger">@item.PriorityLevel</span>
+                            <span class="badge badge-pill badge-danger">   </span>
                         }
                         else if (item.PriorityLevel == Core.Enums.PriorityLevel.Low.ToString())
                         {
-                            <span class="badge badge-pill badge-primary">@item.PriorityLevel</span>
+                            <span class="badge badge-pill badge-primary">   </span>
                         }
                         else
                         {
-                            <span class="badge badge-pill badge-warning">@item.PriorityLevel</span>
+                            <span class="badge badge-pill badge-warning">   </span>
                         }
+                        <h5 class="card-title">@item.Title</h5>
+                        <h6 class="card-subtitle mb-2 text-muted">@item.Description</h6>
+                        <a asp-page="/Project/UpdateProject" asp-route-id="@item.Id"><i class="fa-solid fa-pen-to-square text-black"></i></a>
+
+
                         <hr />
-                        <form method="post" asp-page-handler="Update">
+                        <form method="post">
                             <input type="hidden" name="taskStatus" value="Progress" />
-                            <button type="submit" class="btn btn-primary btn-sm" asp-route-taskId="@item.Id" asp-page-handler="Update">
-                                <i class="fa-solid fa-arrow-left"></i>
-                            </button>
+                           
+                                <button type="submit" class="btn btn-primary btn-sm d-inline-flex" asp-route-taskId="@item.Id" asp-page-handler="UpdateTaskStatus">
+                                    <i class="fa-solid fa-arrow-left"></i>
+                                </button>
+                          
                         </form>
-                        <form method="post" asp-page-handler="Update">
+                        <form method="post">
                             <input type="hidden" name="taskStatus" value="Done" />
-                            <button type="submit" class="btn btn-success btn-sm" asp-route-taskId="@item.Id" asp-page-handler="Update">
-                                <i class="fa-solid fa-arrow-right"></i>
-                            </button>
+                                <button type="submit" class="btn btn-success btn-sm d-inline-flex" asp-route-taskId="@item.Id" asp-page-handler="UpdateTaskStatus">
+                                    <i class="fa-solid fa-arrow-right"></i>
+                                </button>
                         </form>
                     </div>
                 }
@@ -185,25 +247,28 @@
                 {
 
                     <div class="card-body">
-                        <h5 class="card-title">@item.Title</h5>
-                        <h6 class="card-subtitle mb-2 text-muted">@item.Description</h6>
-
                         @if (item.PriorityLevel == Core.Enums.PriorityLevel.High.ToString())
                         {
-                            <span class="badge badge-pill badge-danger">@item.PriorityLevel</span>
+                            <span class="badge badge-pill badge-danger">   </span>
                         }
                         else if (item.PriorityLevel == Core.Enums.PriorityLevel.Low.ToString())
                         {
-                            <span class="badge badge-pill badge-primary">@item.PriorityLevel</span>
+                            <span class="badge badge-pill badge-primary">   </span>
                         }
                         else
                         {
-                            <span class="badge badge-pill badge-warning">@item.PriorityLevel</span>
+                            <span class="badge badge-pill badge-warning">   </span>
                         }
+                        <h5 class="card-title">@item.Title</h5>
+                        <h6 class="card-subtitle mb-2 text-muted">@item.Description</h6>
+
+
+                        <a asp-page="/Project/UpdateProject" asp-route-id="@item.Id"><i class="fa-solid fa-pen-to-square text-black"></i></a>
+
                         <hr />
-                        <form method="post" asp-page-handler="Update">
+                        <form method="post">
                             <input type="hidden" name="taskStatus" value="Review" />
-                            <button type="submit" class="btn btn-danger btn-sm" asp-route-taskId="@item.Id" asp-page-handler="Update">
+                            <button type="submit" class="btn btn-danger btn-sm d-inline-flex" asp-route-taskId="@item.Id" asp-page-handler="UpdateTaskStatus">
                                 <i class="fa-solid fa-arrow-left"></i>
                             </button>
                         </form>
@@ -214,131 +279,4 @@
     </div>
 </div>
 
-<!--Create-->
-<div class="row" style="display:none" id="createRow">
-    <div class="col-12">
-        <form method="post">
-            <input type="hidden" asp-for="CreateTask.ProjectId" />
-            <div class="col-8 offset-2 d-inline-flex">
-                <div class="col-8 form-group">
-                    <span> Title</span>
-                    <input asp-for="CreateTask.Title" type="text" class="form-control">
-                </div>
-            </div>
-            <div class="col-8 offset-2 d-inline-flex mt-1">
-                <div class="col-4 form-group">
-                    <span> Description</span>
-                    <textarea class="form-control" asp-for="CreateTask.Description" rows="3"></textarea>
-                </div>
-            </div>
-            <div class="col-8 offset-2 d-inline-flex mt-1">
-                <div class="col-4 form-group mx-1">
-                    <span> Status</span>
-                    <select asp-for="CreateTask.TaskStatus" asp-items="Html.GetEnumSelectList<TaskMaster.Shared.Dtos.TaskDtos.TaskStatusDto>()" class="form-control form-select">
-                        <option value="">Choose..</option>
-                    </select>
-                </div>
-                <div class="col-4 form-group mx-1">
-                    <span> Priority</span>
-                    <select asp-for="CreateTask.PriorityLevel" asp-items="Html.GetEnumSelectList<TaskMaster.Shared.Dtos.TaskDtos.PriorityLevelDto>()" class="form-control form-select">
-                        <option value="">Choose..</option>
-                    </select>
-                </div>
-            </div>
-            <div class="col-8 offset-2 d-inline-flex mt-1">
-                <div class="col-4 form-group">
-                    <span> Starting</span>
-                    <input type="date" class="form-control" asp-for="CreateTask.StartingDate">
-                </div>
-                <div class="col-4 form-group mx-1">
-                    <span> Duration</span>
-                    <input type="text" class="form-control" asp-for="CreateTask.Duration">
-                </div>
-            </div>
-            <div class="col-8 offset-2 d-inline-flex mt-1">
-                <div class="col-4 form-group">
-                    <span> Finished</span>
-                    <input type="date" class="form-control" asp-for="CreateTask.FinishedDate">
-                </div>
-            </div>
-            <div class="col-8 offset-2 d-inline-flex mt-1">
-                <div class="col-8 form-group mx-1">
-                    <span> Explation</span>
-                    <textarea class="form-control" asp-for="CreateTask.StatusExplation" rows="3"></textarea>
-                </div>
-            </div>
-            <div class="col-8 offset-2 text-center mt-2">
-                <div class="col-8 form-group">
-                    <button type="submit" class="btn btn-success btn-sm"><i class="fa-solid fa-floppy-disk"></i> Save</button>
-                    <button id="cancelButton" type="button" class="btn btn-warning btn-sm mx-3"><i class="fa-solid fa-rectangle-xmark"></i> Cancel</button>
-                </div>
-            </div>
-        </form>
-    </div>
-</div>
 
-
-@section Scripts{
-
-    <script>
-
-        // Filter
-        $(document).ready(function () {
-            $('.filterable .btn-filter').click(function () {
-                var $panel = $(this).parents('.filterable'),
-                    $filters = $panel.find('.filters input'),
-                    $tbody = $panel.find('.table tbody');
-                if ($filters.prop('disabled') == true) {
-                    $filters.prop('disabled', false);
-                    $filters.first().focus();
-                } else {
-                    $filters.val('').prop('disabled', true);
-                    $tbody.find('.no-result').remove();
-                    $tbody.find('tr').show();
-                }
-            });
-
-            $('.filterable .filters input').keyup(function (e) {
-                /* Ignore tab key */
-                var code = e.keyCode || e.which;
-                if (code == '9') return;
-                /* Useful DOM data and selectors */
-                var $input = $(this),
-                    inputContent = $input.val().toLowerCase(),
-                    $panel = $input.parents('.filterable'),
-                    column = $panel.find('.filters th').index($input.parents('th')),
-                    $table = $panel.find('.table'),
-                    $rows = $table.find('tbody tr');
-                /* Dirtiest filter function ever ;) */
-                var $filteredRows = $rows.filter(function () {
-                    var value = $(this).find('td').eq(column).text().toLowerCase();
-                    return value.indexOf(inputContent) === -1;
-                });
-                /* Clean previous no-result if exist */
-                $table.find('tbody .no-result').remove();
-                /* Show all rows, hide filtered ones (never do that outside of a demo ! xD) */
-                $rows.show();
-                $filteredRows.hide();
-                /* Prepend no-result row if all rows are filtered */
-                if ($filteredRows.length === $rows.length) {
-                    $table.find('tbody').prepend($('<tr class="no-result text-center"><td colspan="' + $table.find('.filters th').length + '">No result found</td></tr>'));
-                }
-            });
-        });
-
-        // Create
-
-        $(document).ready(() => {
-
-            $("#createButton").click(() => {
-                $("#createRow").toggle(1000);
-            });
-
-            $("#cancelButton").click(() => {
-                $("#createRow").toggle(1000);
-            });
-        });
-
-
-    </script>
-}

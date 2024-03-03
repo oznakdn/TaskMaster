@@ -28,7 +28,7 @@ public class GetProjectTasksModel(IServiceManager manager) : PageModel
         Tasks = await manager.Task.GetTasksByProjectId(id);
     }
 
-    public async Task<IActionResult> OnPostUpdate(string taskId, [FromForm] string taskStatus)
+    public async Task<IActionResult> OnPostUpdateTaskStatus(string taskId, [FromForm] string taskStatus)
     {
        var projectId =  await manager.Task.UpdateTaskStatusAsync(taskId, taskStatus);
         return RedirectToPage("/ProjectTask/GetProjectTasks", new { id = projectId });
