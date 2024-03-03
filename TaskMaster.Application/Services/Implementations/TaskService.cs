@@ -1,4 +1,5 @@
 ﻿using System.Linq.Expressions;
+using System.Threading;
 using TaskMaster.Application.Services.Interfaces;
 using TaskMaster.Core.Enums;
 using TaskMaster.Core.Models;
@@ -116,5 +117,20 @@ public class TaskService : ITaskService
         };
 
         await _manager.Task.UpdateAsync(projectTask, cancellationToken);
+    }
+
+    public async Task<string> UpdateTaskStatusAsync(string id, string taskStatus, CancellationToken cancellationToken = default)
+    {
+        var task = await _manager.Task.GetAsync(x => x.Id == id);
+
+        switch (taskStatus)
+        {
+            case "ToDo": task.TaskStatus = ProjectTaskStatus.ToDo; break;
+            case "Progress": task.TaskStatus = ProjectTaskStatus.Progress; break;
+            case "Review": task.TaskStatus = ProjectTaskStatus.Review; break;
+            case "Done": task.TaskStatus = ProjectTaskStatus.Done; break;
+        }
+        await _manager.Task.UpdateAsync(task, cancellationToken);
+        return task.ProjectId;
     }
 }

@@ -14,7 +14,7 @@ public class ProjectTask : ModelBase
     public DateTime? EndingDate => StartingDate!.Value.AddDays(Duration);
     public DateTime? FinishedDate { get; set; }
 
-    public Enums.ProjectTaskStatus TaskStatus { get; set; } = Enums.ProjectTaskStatus.NotStarted;
+    public Enums.ProjectTaskStatus TaskStatus { get; set; } = Enums.ProjectTaskStatus.ToDo;
     public string? StatusExplation { get; set; }
 
 }

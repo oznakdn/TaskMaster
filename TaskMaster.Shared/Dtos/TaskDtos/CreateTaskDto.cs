@@ -23,8 +23,8 @@ public enum PriorityLevelDto
 
 public enum TaskStatusDto
 {
-    NotStarted,
-    Active,
-    Priority,
-    Canceled
+    ToDo,
+    Progress,
+    Review,
+    Done
 }

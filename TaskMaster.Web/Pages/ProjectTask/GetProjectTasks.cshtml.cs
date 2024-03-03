@@ -12,9 +12,13 @@ public class GetProjectTasksModel(IServiceManager manager) : PageModel
     [BindProperty]
     public CreateTaskDto CreateTask { get; set; }
 
+
     [BindProperty]
     public string Id { get; set; }
     public string ProjectName { get; set; }
+
+    [BindProperty]
+    public string TaskStatus { get; set; }
 
     public async Task OnGetAsync(string id)
     {
@@ -24,10 +28,16 @@ public class GetProjectTasksModel(IServiceManager manager) : PageModel
         Tasks = await manager.Task.GetTasksByProjectId(id);
     }
 
+    public async Task<IActionResult> OnPostUpdate(string taskId, [FromForm] string taskStatus)
+    {
+       var projectId =  await manager.Task.UpdateTaskStatusAsync(taskId, taskStatus);
+        return RedirectToPage("/ProjectTask/GetProjectTasks", new { id = projectId });
+    }
+
     public async Task<IActionResult> OnPostAsync()
     {
         CreateTask.ProjectId = Id;
         await manager.Task.CreateTaskAsync(CreateTask, default!);
-        return RedirectToPage("/ProjectTask/GetProjectTasks", new { id= Id});
+        return RedirectToPage("/ProjectTask/GetProjectTasks", new { id = Id });
     }
 }

@@ -2,8 +2,8 @@
 
 public enum ProjectTaskStatus
 {
-    NotStarted, // Henuz baslamadi
-    Active, // Aktif
-    Priority, // Oncelik verildi
-    Canceled // Iptal edildi
+    ToDo,
+    Progress,
+    Review,
+    Done
 }

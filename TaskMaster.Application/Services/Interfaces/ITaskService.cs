@@ -12,5 +12,7 @@ public interface ITaskService
 
     Task CreateTaskAsync(CreateTaskDto createTaskDto, CancellationToken cancellationToken = default);
     Task UpdateTaskAsync(UpdateTaskDto updateTaskDto, CancellationToken cancellationToken = default(CancellationToken));
+
+    Task<string> UpdateTaskStatusAsync(string id, string taskStatus, CancellationToken cancellationToken = default(CancellationToken));
     Task DeleteTaskAsync(string id, CancellationToken cancellationToken = default(CancellationToken));
 }
