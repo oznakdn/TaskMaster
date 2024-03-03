@@ -170,7 +170,8 @@
                         }
                         <h5 class="card-title">@item.Title</h5>
                         <h6 class="card-subtitle mb-2 text-muted">@item.Description</h6>
-                        <a asp-page="/Project/UpdateProject" asp-route-id="@item.Id"><i class="fa-solid fa-pen-to-square text-black"></i></a>
+                        <a asp-page="/ProjectTask/UpdateTask" asp-route-id="@item.Id"><i class="fa-solid fa-pen-to-square text-black"></i></a>
+
 
                         <hr />
                         <form method="post">
@@ -217,7 +218,8 @@
                         }
                         <h5 class="card-title">@item.Title</h5>
                         <h6 class="card-subtitle mb-2 text-muted">@item.Description</h6>
-                        <a asp-page="/Project/UpdateProject" asp-route-id="@item.Id"><i class="fa-solid fa-pen-to-square text-black"></i></a>
+                        <a asp-page="/ProjectTask/UpdateTask" asp-route-id="@item.Id"><i class="fa-solid fa-pen-to-square text-black"></i></a>
+
 
 
                         <hr />
@@ -247,9 +249,9 @@
         {
             @if (item.TaskStatus == Core.Enums.ProjectTaskStatus.Done.ToString())
             {
-                <div class="card col">
+                <div class="card col my-2">
 
-                    <div class="card-body my-2">
+                    <div class="card-body">
                         @if (item.PriorityLevel == Core.Enums.PriorityLevel.High.ToString())
                         {
                             <span class="badge badge-pill badge-danger">   </span>
@@ -266,7 +268,8 @@
                         <h6 class="card-subtitle mb-2 text-muted">@item.Description</h6>
 
 
-                        <a asp-page="/Project/UpdateProject" asp-route-id="@item.Id"><i class="fa-solid fa-pen-to-square text-black"></i></a>
+                        <a asp-page="/ProjectTask/UpdateTask" asp-route-id="@item.Id"><i class="fa-solid fa-pen-to-square text-black"></i></a>
+
 
                         <hr />
                         <form method="post">

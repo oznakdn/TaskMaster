@@ -5,76 +5,71 @@
     <div class="display-6 text-center">Update</div>
 </div>
 <div class="row justify-content-center">
-    <div class="col-12">
-        <form method="post">
-            <input type="hidden" asp-for="UpdateTask.Id" />
-            <div class="col-8 offset-2">
-                <div class="form-check form-switch">
-                    <input class="form-check-input" asp-for="UpdateTask.IsActive" type="checkbox" role="switch" id="flexSwitchCheckDefault">
-                    @if (Model.UpdateTask.IsActive == true)
-                    {
-                        <label class="form-check-label" for="flexSwitchCheckDefault">Active</label>
-                    }
-                    else
-                    {
-                        <label class="form-check-label" for="flexSwitchCheckDefault">Passive</label>
-                    }
+    <div class="card">
+        <div class="card-body">
+            <form method="post">
+                <input type="hidden" asp-for="UpdateTask.Id" />
+                <div class="col-4 form-group p-1">
+                    <div class="form-check form-switch form-group">
+                        <input class="form-check-input" asp-for="UpdateTask.IsActive" type="checkbox" role="switch" id="flexSwitchCheckDefault">
+                        @if (Model.UpdateTask.IsActive == true)
+                        {
+                            <label class="form-check-label" for="flexSwitchCheckDefault">Active</label>
+                        }
+                        else
+                        {
+                            <label class="form-check-label" for="flexSwitchCheckDefault">Passive</label>
+                        }
+                    </div>
                 </div>
-            </div>
-            <div class="col-8 offset-2 d-inline-flex">
-                <div class="col-8 form-group">
+
+                <div class="col-12 form-group p-1">
                     <span> Title</span>
                     <input asp-for="UpdateTask.Title" type="text" class="form-control">
                 </div>
-            </div>
-            <div class="col-8 offset-2 d-inline-flex mt-1">
-                <div class="col-4 form-group">
+                <div class="col-12 form-group p-1">
                     <span> Description</span>
                     <textarea class="form-control" asp-for="UpdateTask.Description" rows="3"></textarea>
                 </div>
-            </div>
-            <div class="col-8 offset-2 d-inline-flex mt-1">
-                <div class="col-4 form-group mx-1">
-                    <span> Status</span>
-                    <select asp-for="UpdateTask.TaskStatus" asp-items="Html.GetEnumSelectList<TaskMaster.Shared.Dtos.TaskDtos.TaskStatusDto>()" class="form-control form-select">
-                        <option value="">Choose..</option>
-                    </select>
+                <div class="col-12 d-inline-flex">
+                    <div class="col-6 form-group p-1">
+                        <span> Status</span>
+                        <select asp-for="UpdateTask.TaskStatus" asp-items="Html.GetEnumSelectList<TaskMaster.Shared.Dtos.TaskDtos.TaskStatusDto>()" class="form-control form-select">
+                            <option value="">Choose..</option>
+                        </select>
+                    </div>
+                    <div class="col-6 form-group p-1">
+                        <span> Priority</span>
+                        <select asp-for="UpdateTask.PriorityLevel" asp-items="Html.GetEnumSelectList<TaskMaster.Shared.Dtos.TaskDtos.PriorityLevelDto>()" class="form-control form-select">
+                            <option value="">Choose..</option>
+                        </select>
+                    </div>
                 </div>
-                <div class="col-4 form-group mx-1">
-                    <span> Priority</span>
-                    <select asp-for="UpdateTask.PriorityLevel" asp-items="Html.GetEnumSelectList<TaskMaster.Shared.Dtos.TaskDtos.PriorityLevelDto>()" class="form-control form-select">
-                        <option value="">Choose..</option>
-                    </select>
+                <div class="col-12 d-inline-flex">
+                    <div class="col-4 p-1">
+                        <span> Starting</span>
+                        <input type="date" class="form-control" asp-for="UpdateTask.StartingDate">
+                    </div>
+                    <div class="col-4 p-1">
+                        <span> Duration</span>
+                        <input type="text" class="form-control" asp-for="UpdateTask.Duration">
+                    </div>
+                    <div class="col-4 p-1">
+                        <span> Finished</span>
+                        <input type="date" class="form-control" asp-for="UpdateTask.FinishedDate">
+                    </div>
                 </div>
-            </div>
-            <div class="col-8 offset-2 d-inline-flex mt-1">
-                <div class="col-4 form-group">
-                    <span> Starting</span>
-                    <input type="date" class="form-control" asp-for="UpdateTask.StartingDate">
-                </div>
-                <div class="col-4 form-group mx-1">
-                    <span> Duration</span>
-                    <input type="text" class="form-control" asp-for="UpdateTask.Duration">
-                </div>
-            </div>
-            <div class="col-8 offset-2 d-inline-flex mt-1">
-                <div class="col-4 form-group">
-                    <span> Finished</span>
-                    <input type="date" class="form-control" asp-for="UpdateTask.FinishedDate">
-                </div>
-            </div>
-            <div class="col-8 offset-2 d-inline-flex mt-1">
-                <div class="col-8 form-group mx-1">
+                <div class="col-12 form-group p-1">
                     <span> Explation</span>
                     <textarea class="form-control" asp-for="UpdateTask.StatusExplation" rows="3"></textarea>
                 </div>
-            </div>
-            <div class="col-8 offset-2 text-center mt-2">
-                <div class="col-8 form-group">
-                    <button type="submit" class="btn btn-success btn-sm"><i class="fa-solid fa-floppy-disk"></i> Save</button>
-                    <a asp-page="/ProjectTask/GetProjectTasks" asp-route-id="@Model.ProjectId" class="btn btn-warning btn-sm mx-3"><i class="fa-solid fa-backward"></i><span> Back</span></a>
+                <div class="form-group p-1 my-2">
+                    <div class="col-8 form-group">
+                        <button type="submit" class="btn btn-success btn-sm"><i class="fa-solid fa-floppy-disk"></i> Save</button>
+                        <a asp-page="/ProjectTask/GetProjectTasks" asp-route-id="@Model.ProjectId" class="btn btn-warning btn-sm mx-3"><i class="fa-solid fa-backward"></i><span> Back</span></a>
+                    </div>
                 </div>
-            </div>
-        </form>
+            </form>
+        </div>
     </div>
 </div>
