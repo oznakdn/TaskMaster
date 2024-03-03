@@ -98,22 +98,22 @@
     <div class="text-center">
         <span class="fw-bold">Priority: </span>
         <span class="badge badge-pill badge-danger">High</span>
-        <span class="badge badge-pill badge-primary">Low</span>
         <span class="badge badge-pill badge-warning">Medium</span>
+        <span class="badge badge-pill badge-success">Low</span>
     </div>
 </div>
 
 <div class="row d-flex mx-1">
     <div class="col">
-        <div class="text-center text-warning my-1 fw-bold">ToDo</div>
+        <div class="text-center text-bg-secondary text-white my-1 fw-bold">ToDo</div>
         <hr />
 
         @foreach (var item in Model.Tasks)
         {
-            <div class="card col my-2">
-                @if (item.TaskStatus == Core.Enums.ProjectTaskStatus.ToDo.ToString())
-                {
 
+            @if (item.TaskStatus == Core.Enums.ProjectTaskStatus.ToDo.ToString())
+            {
+                <div class="card col my-2">
                     <div class="card-body">
                         @if (item.PriorityLevel == Core.Enums.PriorityLevel.High.ToString())
                         {
@@ -121,7 +121,7 @@
                         }
                         else if (item.PriorityLevel == Core.Enums.PriorityLevel.Low.ToString())
                         {
-                            <span class="badge badge-pill badge-primary">   </span>
+                            <span class="badge badge-pill badge-success">   </span>
                         }
                         else
                         {
@@ -129,7 +129,7 @@
                         }
                         <h5 class="card-title">@item.Title</h5>
                         <h6 class="card-subtitle mb-2 text-muted">@item.Description</h6>
-                        <a asp-page="/Project/UpdateProject" asp-route-id="@item.Id"><i class="fa-solid fa-pen-to-square text-black"></i></a>
+                        <a asp-page="/ProjectTask/UpdateTask" asp-route-id="@item.Id"><i class="fa-solid fa-pen-to-square text-black"></i></a>
 
                         <hr />
                         <form method="post">
@@ -140,19 +140,19 @@
                         </form>
 
                     </div>
-                }
-            </div>
+                </div>
+            }
+
         }
     </div>
     <div class="col">
-        <div class="text-center text-primary bg-white my-1 fw-bold">Progress</div>
+        <div class="text-center text-bg-secondary text-white my-1 fw-bold">Progress</div>
         <hr />
         @foreach (var item in Model.Tasks)
         {
-            <div class="card col mt-1">
-                @if (item.TaskStatus == Core.Enums.ProjectTaskStatus.Progress.ToString())
-                {
-
+            @if (item.TaskStatus == Core.Enums.ProjectTaskStatus.Progress.ToString())
+            {
+                <div class="card col my-2">
                     <div class="card-body">
                         @if (item.PriorityLevel == Core.Enums.PriorityLevel.High.ToString())
                         {
@@ -160,7 +160,7 @@
                         }
                         else if (item.PriorityLevel == Core.Enums.PriorityLevel.Low.ToString())
                         {
-                            <span class="badge badge-pill badge-primary">   </span>
+                            <span class="badge badge-pill badge-success">   </span>
                         }
                         else
                         {
@@ -179,26 +179,27 @@
                         </form>
                         <form method="post">
                             <input type="hidden" name="taskStatus" value="Review" />
-                            <button type="submit" class="btn btn-danger btn-sm d-inline-flex" asp-route-taskId="@item.Id" asp-page-handler="UpdateTaskStatus">
+                            <button type="submit" class="btn btn-primary btn-sm d-inline-flex" asp-route-taskId="@item.Id" asp-page-handler="UpdateTaskStatus">
                                 <i class="fa-solid fa-arrow-right"></i>
                             </button>
                         </form>
 
                     </div>
-                }
-            </div>
+                </div>
+            }
+
         }
     </div>
     <div class="col">
-        <div class="text-center text-danger bg-white mt-1 fw-bold">Review</div>
+        <div class="text-center text-bg-secondary text-white my-1 fw-bold">Review</div>
+
         <hr />
         @foreach (var item in Model.Tasks)
         {
 
-            <div class="card col">
-                @if (item.TaskStatus == Core.Enums.ProjectTaskStatus.Review.ToString())
-                {
-
+            @if (item.TaskStatus == Core.Enums.ProjectTaskStatus.Review.ToString())
+            {
+                <div class="card col my-2">
                     <div class="card-body">
                         @if (item.PriorityLevel == Core.Enums.PriorityLevel.High.ToString())
                         {
@@ -206,7 +207,7 @@
                         }
                         else if (item.PriorityLevel == Core.Enums.PriorityLevel.Low.ToString())
                         {
-                            <span class="badge badge-pill badge-primary">   </span>
+                            <span class="badge badge-pill badge-success">   </span>
                         }
                         else
                         {
@@ -220,40 +221,40 @@
                         <hr />
                         <form method="post">
                             <input type="hidden" name="taskStatus" value="Progress" />
-                           
-                                <button type="submit" class="btn btn-primary btn-sm d-inline-flex" asp-route-taskId="@item.Id" asp-page-handler="UpdateTaskStatus">
-                                    <i class="fa-solid fa-arrow-left"></i>
-                                </button>
-                          
+
+                            <button type="submit" class="btn btn-warning btn-sm d-inline-flex" asp-route-taskId="@item.Id" asp-page-handler="UpdateTaskStatus">
+                                <i class="fa-solid fa-arrow-left"></i>
+                            </button>
+
                         </form>
                         <form method="post">
                             <input type="hidden" name="taskStatus" value="Done" />
-                                <button type="submit" class="btn btn-success btn-sm d-inline-flex" asp-route-taskId="@item.Id" asp-page-handler="UpdateTaskStatus">
-                                    <i class="fa-solid fa-arrow-right"></i>
-                                </button>
+                            <button type="submit" class="btn btn-primary btn-sm d-inline-flex" asp-route-taskId="@item.Id" asp-page-handler="UpdateTaskStatus">
+                                <i class="fa-solid fa-arrow-right"></i>
+                            </button>
                         </form>
                     </div>
-                }
-            </div>
+                </div>
+            }
         }
     </div>
     <div class="col">
-        <div class="text-center text-success bg-white mt-1 fw-bold">Done</div>
+        <div class="text-center text-bg-secondary text-white my-1 fw-bold">Done</div>
         <hr />
         @foreach (var item in Model.Tasks)
         {
-            <div class="card col">
-                @if (item.TaskStatus == Core.Enums.ProjectTaskStatus.Done.ToString())
-                {
+            @if (item.TaskStatus == Core.Enums.ProjectTaskStatus.Done.ToString())
+            {
+                <div class="card col">
 
-                    <div class="card-body">
+                    <div class="card-body my-2">
                         @if (item.PriorityLevel == Core.Enums.PriorityLevel.High.ToString())
                         {
                             <span class="badge badge-pill badge-danger">   </span>
                         }
                         else if (item.PriorityLevel == Core.Enums.PriorityLevel.Low.ToString())
                         {
-                            <span class="badge badge-pill badge-primary">   </span>
+                            <span class="badge badge-pill badge-success">   </span>
                         }
                         else
                         {
@@ -268,13 +269,14 @@
                         <hr />
                         <form method="post">
                             <input type="hidden" name="taskStatus" value="Review" />
-                            <button type="submit" class="btn btn-danger btn-sm d-inline-flex" asp-route-taskId="@item.Id" asp-page-handler="UpdateTaskStatus">
+                            <button type="submit" class="btn btn-warning btn-sm d-inline-flex" asp-route-taskId="@item.Id" asp-page-handler="UpdateTaskStatus">
                                 <i class="fa-solid fa-arrow-left"></i>
                             </button>
                         </form>
                     </div>
-                }
-            </div>
+                </div>
+            }
+
         }
     </div>
 </div>
