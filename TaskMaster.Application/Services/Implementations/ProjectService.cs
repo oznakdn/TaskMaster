@@ -29,7 +29,7 @@ public class ProjectService : IProjectService
             StartingDate = projectDto.StartingDate,
             FinishedDate = projectDto.FinishedDate,
             ProjectStatus = (ProjectStatus)projectDto.ProjectStatus,
-            StatusExplation = projectDto.StatusExplation
+            Comment = projectDto.Comment
         };
 
         await _repository.Project.CreateAsync(project);
@@ -55,7 +55,7 @@ public class ProjectService : IProjectService
             project.EndingDate,
             project.FinishedDate,
             project.ProjectStatus.ToString(),
-            project.StatusExplation!);
+            project.Comment!);
     }
 
     public async Task<IEnumerable<ProjectDto>> GetProjectsAsync(Expression<Func<Project, bool>> filter = null, CancellationToken cancellationToken = default)
@@ -75,7 +75,7 @@ public class ProjectService : IProjectService
             x.EndingDate,
             x.FinishedDate,
             x.ProjectStatus.ToString(),
-            x.StatusExplation!)).ToList();
+            x.Comment!)).ToList();
 
     }
 
@@ -92,8 +92,8 @@ public class ProjectService : IProjectService
             FinishedDate = projectDto.FinishedDate,
             IsActive = projectDto.IsActive,
             StartingDate = projectDto.StartingDate,
-            StatusExplation = projectDto.StatusExplation,
-            ProjectStatus = (TaskMaster.Core.Enums.ProjectStatus)projectDto.ProjectStatus
+            Comment = projectDto.Comment,
+            ProjectStatus = (ProjectStatus)projectDto.ProjectStatus
         };
 
         await _repository.Project.UpdateAsync(project, cancellationToken);
