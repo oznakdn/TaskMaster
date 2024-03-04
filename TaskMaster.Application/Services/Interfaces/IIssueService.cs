@@ -5,6 +5,8 @@ namespace TaskMaster.Application.Services.Interfaces;
 public interface IIssueService
 {
     Task<IEnumerable<IssueDto>> GetIssuesByProjectId(string projectId, CancellationToken cancellationToken = default(CancellationToken));
+    Task<IEnumerable<IssueDto>> GetIssuessAsync(CancellationToken cancellationToken = default(CancellationToken));
+
     Task<IssueDto> GetIssueByIdAsync(string id, CancellationToken cancellationToken = default(CancellationToken));
     Task<int> IssueCountAsync(CancellationToken cancellationToken = default(CancellationToken));
 

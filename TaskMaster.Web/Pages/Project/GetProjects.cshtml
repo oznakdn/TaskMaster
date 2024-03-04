@@ -99,13 +99,13 @@
                 <span class="text-bg-light text-primary">Duration: </span><span>@item.Duration day</span>
                 <span class="text-bg-light text-primary">Ending: </span><span>@item.EndingDate!.Value.ToShortDateString()</span>
                 <hr />
-                <div class="btn-group my-2 p-1 m-2">
-                    <a target="_blank" href="@item.Repo" class="btn btn-light"><i class="fa-brands fa-github"></i></a>
+                <div class="btn-group btn-group-sm my-2 p-1 m-2">
+                    <a target="_blank" href="@item.Repo" class="btn btn-warning"><i class="fa-brands fa-github"></i></a>
                     <a asp-page="/ProjectTask/GetProjectTasks" asp-route-id="@item.Id" class="btn btn-info"><i class="fa-solid fa-clipboard-check text-black"></i></a>
                     <a asp-page="/ProjectIssue/GetProjectIssues" asp-route-id="@item.Id" class="btn btn-primary"><i class="fa-regular fa-eye text-black"></i></a>
                 </div>
                 <hr />
-                <div class="btn-group my-2 p-1 m-2">
+                <div class="btn-group btn-group-sm my-2 p-1 m-2">
                     <a asp-page="/Project/UpdateProject" asp-route-id="@item.Id" class="btn btn-warning"><i class="fa-solid fa-pen-to-square text-black"></i></a>
                     <a asp-page="/Project/DeleteProject" asp-route-id="@item.Id" class="btn btn-danger"><i class="fa-solid fa-trash text-black mx-1"></i></a>
                     <a asp-page="/Project/GetProjectDetails" asp-route-id="@item.Id" class="btn btn-secondary"><i class="fa-solid fa-circle-info text-black"></i></a>

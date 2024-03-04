@@ -107,4 +107,20 @@ public class IssueService : IIssueService
         await _manager.Issue.DeleteAllAsync(x => x.ProjectId == projectId, cancellationToken);
     }
 
+    public async Task<IEnumerable<IssueDto>> GetIssuessAsync(CancellationToken cancellationToken = default)
+    {
+        var issues = await _manager.Issue.GetAllAsync(cancellationToken: cancellationToken);
+
+        return issues.Select(x => new IssueDto(
+            x.Id,
+            x.ProjectId,
+            x.Summary,
+            x.PriorityLevel.ToString(),
+            x.StartingDate,
+            x.FixedDate,
+            x.ResolutionStatus.ToString(),
+            x.Comment,
+            x.IsActive
+            )).ToList();
+    }
 }
