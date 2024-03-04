@@ -131,8 +131,9 @@
                         }
                         <h5 class="card-title">@item.Title</h5>
                         <h6 class="card-subtitle mb-2 text-muted">@item.Description</h6>
-                        <a asp-page="/ProjectTask/UpdateTask" asp-route-id="@item.Id"><i class="fa-solid fa-pen-to-square text-black"></i></a>
-
+                        <hr />
+                        <a asp-page="/ProjectTask/UpdateTask" asp-route-id="@item.Id" class="btn btn-light"><i class="fa-solid fa-pen-to-square text-black"></i></a>
+                        <a asp-page="/ProjectTask/DeleteTask" asp-route-id="@item.Id" class="btn btn-light"><i class="fa-solid fa-trash text-black"></i></a>
                         <hr />
                         <form method="post">
                             <input type="hidden" name="taskStatus" value="Progress" />
@@ -170,9 +171,9 @@
                         }
                         <h5 class="card-title">@item.Title</h5>
                         <h6 class="card-subtitle mb-2 text-muted">@item.Description</h6>
-                        <a asp-page="/ProjectTask/UpdateTask" asp-route-id="@item.Id"><i class="fa-solid fa-pen-to-square text-black"></i></a>
-
-
+                        <hr />
+                        <a asp-page="/ProjectTask/UpdateTask" asp-route-id="@item.Id" class="btn btn-light"><i class="fa-solid fa-pen-to-square text-black"></i></a>
+                        <a asp-page="/ProjectTask/DeleteTask" asp-route-id="@item.Id" class="btn btn-light"><i class="fa-solid fa-trash text-black"></i></a>
                         <hr />
                         <form method="post">
                             <input type="hidden" name="taskStatus" value="ToDo" />
@@ -218,10 +219,9 @@
                         }
                         <h5 class="card-title">@item.Title</h5>
                         <h6 class="card-subtitle mb-2 text-muted">@item.Description</h6>
-                        <a asp-page="/ProjectTask/UpdateTask" asp-route-id="@item.Id"><i class="fa-solid fa-pen-to-square text-black"></i></a>
-
-
-
+                        <hr />
+                        <a asp-page="/ProjectTask/UpdateTask" asp-route-id="@item.Id" class="btn btn-light"><i class="fa-solid fa-pen-to-square text-black"></i></a>
+                        <a asp-page="/ProjectTask/DeleteTask" asp-route-id="@item.Id" class="btn btn-light"><i class="fa-solid fa-trash text-black"></i></a>
                         <hr />
                         <form method="post">
                             <input type="hidden" name="taskStatus" value="Progress" />
@@ -229,7 +229,6 @@
                             <button type="submit" class="btn btn-warning btn-sm d-inline-flex" asp-route-taskId="@item.Id" asp-page-handler="UpdateTaskStatus">
                                 <i class="fa-solid fa-arrow-left"></i>
                             </button>
-
                         </form>
                         <form method="post">
                             <input type="hidden" name="taskStatus" value="Done" />
@@ -266,11 +265,9 @@
                         }
                         <h5 class="card-title">@item.Title</h5>
                         <h6 class="card-subtitle mb-2 text-muted">@item.Description</h6>
-
-
-                        <a asp-page="/ProjectTask/UpdateTask" asp-route-id="@item.Id"><i class="fa-solid fa-pen-to-square text-black"></i></a>
-
-
+                        <hr />
+                        <a asp-page="/ProjectTask/UpdateTask" asp-route-id="@item.Id" class="btn btn-light"><i class="fa-solid fa-pen-to-square text-black"></i></a>
+                        <a asp-page="/ProjectTask/DeleteTask" asp-route-id="@item.Id" class="btn btn-light"><i class="fa-solid fa-trash text-black"></i></a>
                         <hr />
                         <form method="post">
                             <input type="hidden" name="taskStatus" value="Review" />

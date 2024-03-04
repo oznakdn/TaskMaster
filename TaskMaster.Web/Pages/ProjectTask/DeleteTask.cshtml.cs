@@ -11,14 +11,15 @@ public class DeleteTaskModel(IServiceManager manager) : PageModel
 
     public async Task OnGet(string id)
     {
-        var task = await manager.Task.GetTaskById(id);
-        TempData["projectId"] = task.ProjectId;
         Id = id;
+        var project = await manager.Task.GetTaskById(id);
+        TempData["projectId"] = project.ProjectId;
     }
 
     public async Task<IActionResult> OnPostAsync()
     {
+        var project = await manager.Task.GetTaskById(Id);
         await manager.Task.DeleteTaskAsync(Id);
-        return RedirectToPage("/ProjectTask/GetProjectTasks",new { id = TempData["projectId"]});
+        return RedirectToPage("/ProjectTask/GetProjectTasks", new { id = project.ProjectId });
     }
 }
