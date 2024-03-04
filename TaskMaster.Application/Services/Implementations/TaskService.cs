@@ -98,6 +98,8 @@ public class TaskService : ITaskService
             )).ToList();
     }
 
+    public async Task<int> TaskCountAsync(CancellationToken cancellationToken = default) => await _manager.Task.CountAsync(cancellationToken);
+
     public async Task UpdateTaskAsync(UpdateTaskDto updateTaskDto, CancellationToken cancellationToken = default)
     {
         var task = await _manager.Task.GetAsync(x => x.Id == updateTaskDto.Id, cancellationToken);
@@ -129,4 +131,6 @@ public class TaskService : ITaskService
         await _manager.Task.UpdateAsync(task, cancellationToken);
         return task.ProjectId;
     }
+
+
 }

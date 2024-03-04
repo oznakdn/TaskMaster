@@ -11,4 +11,5 @@ public interface IMongoContext<T>
     Task CreateAsync(T document, CancellationToken cancellationToken = default(CancellationToken));
     Task UpdateAsync(T document, CancellationToken cancellationToken = default(CancellationToken));
     Task DeleteAsync(string id, CancellationToken cancellationToken = default(CancellationToken));
+    Task<int>CountAsync(CancellationToken cancellationToken = default(CancellationToken));
 }

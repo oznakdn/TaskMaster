@@ -100,4 +100,6 @@ public class IssueService : IIssueService
         await _manager.Issue.DeleteAsync(id, cancellationToken);
     }
 
+    public async Task<int> IssueCountAsync(CancellationToken cancellationToken = default) => await _manager.Issue.CountAsync(cancellationToken);
+
 }

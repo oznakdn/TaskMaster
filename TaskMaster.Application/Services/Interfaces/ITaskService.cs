@@ -9,6 +9,8 @@ public interface ITaskService
     Task<IEnumerable<TaskDto>> GetTasksByProjectId(string projectId, CancellationToken cancellationToken = default(CancellationToken));
     Task<TaskDto> GetTaskById(string id, CancellationToken cancellationToken = default(CancellationToken));
     Task<IEnumerable<TaskDto>> GetTasksAsync(Expression<Func<ProjectTask, bool>> filter = null, CancellationToken cancellationToken = default(CancellationToken));
+    Task<int> TaskCountAsync(CancellationToken cancellationToken = default(CancellationToken));
+
 
     Task CreateTaskAsync(CreateTaskDto createTaskDto, CancellationToken cancellationToken = default);
     Task UpdateTaskAsync(UpdateTaskDto updateTaskDto, CancellationToken cancellationToken = default(CancellationToken));

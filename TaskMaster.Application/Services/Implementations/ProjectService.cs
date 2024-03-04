@@ -79,6 +79,9 @@ public class ProjectService : IProjectService
 
     }
 
+    public async Task<int> ProjectCountAsync(CancellationToken cancellationToken = default) =>await _repository.Project.CountAsync(cancellationToken);
+
+
     public async Task UpdateProjectAsync(UpdateProjectDto projectDto, CancellationToken cancellationToken = default)
     {
         var project = new Project

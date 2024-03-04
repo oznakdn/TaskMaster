@@ -59,7 +59,11 @@ public abstract class MongoContext<T> : IMongoContext<T>
         await Collection.FindOneAndDeleteAsync(filter: x => x.Id == id, cancellationToken: cancellationToken);
     }
 
-   
+    public async Task<int> CountAsync(CancellationToken cancellationToken = default)
+    {
+        var count =  await Collection.Find(x => true).CountDocumentsAsync(cancellationToken:cancellationToken);
+        return Convert.ToInt32(count);
+    }
 }
 
 
