@@ -94,4 +94,10 @@ public class IssueService : IIssueService
         await _manager.Issue.UpdateAsync(issue, cancellationToken);
         return issue.ProjectId;
     }
+
+    public async Task DeleteIssueAsync(string id, CancellationToken cancellationToken = default)
+    {        
+        await _manager.Issue.DeleteAsync(id, cancellationToken);
+    }
+
 }
