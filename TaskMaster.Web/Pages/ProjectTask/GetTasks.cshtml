@@ -1,0 +1,78 @@
+﻿@page "/tasks"
+@model TaskMaster.Web.Pages.ProjectTask.GetTasksModel
+
+<link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" rel="stylesheet" />
+
+
+<div class="row my-4">
+    <div class="text-center display-6 fw-bold">
+        Priority Level
+    </div>
+</div>
+
+
+<div class="row d-flex mx-1">
+    <div class="col">
+        <div class="text-center text-bg-secondary text-success my-1 fw-bold">Low</div>
+        <hr />
+
+        @foreach (var item in Model.Tasks)
+        {
+
+            @if (item.PriorityLevel == Core.Enums.PriorityLevel.Low.ToString())
+            {
+                <div class="card col my-2">
+                    <div class="card-body">
+                        <h5 class="card-title">@item.Title</h5>
+                        <p class="badge badge-pill badge-success"> @item.TaskStatus</p>
+                        <h6 class="card-subtitle mb-2 text-muted">@item.Description</h6>
+                        <hr />
+                        <a asp-page="/ProjectTask/GetProjectTasks" asp-route-id="@item.ProjectId" class="btn btn-light"><i class="fa-solid fa-arrow-right text-black"></i></a>
+                    </div>
+                </div>
+            }
+
+        }
+    </div>
+    <div class="col">
+        <div class="text-center text-bg-secondary text-warning my-1 fw-bold">Medium</div>
+        <hr />
+        @foreach (var item in Model.Tasks)
+        {
+            @if (item.PriorityLevel == Core.Enums.PriorityLevel.Medium.ToString())
+            {
+                <div class="card col my-2">
+                    <div class="card-body">
+                        <h5 class="card-title">@item.Title</h5>
+                        <p class="badge badge-pill badge-success"> @item.TaskStatus</p>
+                        <h6 class="card-subtitle mb-2 text-muted">@item.Description</h6>
+                        <hr />
+                        <a asp-page="/ProjectTask/GetProjectTasks" asp-route-id="@item.ProjectId" class="btn btn-light"><i class="fa-solid fa-arrow-right text-black"></i></a>
+                    </div>
+                </div>
+            }
+
+        }
+    </div>
+    <div class="col">
+        <div class="text-center text-bg-secondary text-danger my-1 fw-bold">High</div>
+        <hr />
+        @foreach (var item in Model.Tasks)
+        {
+            @if (item.PriorityLevel == Core.Enums.PriorityLevel.High.ToString())
+            {
+                <div class="card col my-2">
+                    <div class="card-body">
+                        <h5 class="card-title">@item.Title</h5>
+
+                        <p class="badge badge-pill badge-success"> @item.TaskStatus</p>
+
+                        <h6 class="card-subtitle mb-2 text-muted">@item.Description</h6>
+                        <hr />
+                        <a asp-page="/ProjectTask/GetProjectTasks" asp-route-id="@item.ProjectId" class="btn btn-light"><i class="fa-solid fa-arrow-right text-black"></i></a>
+                    </div>
+                </div>
+            }
+        }
+    </div>
+</div>
