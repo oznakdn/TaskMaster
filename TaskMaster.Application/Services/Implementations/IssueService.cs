@@ -31,6 +31,23 @@ public class IssueService : IIssueService
 
     }
 
+    public async Task<IssueDto> GetIssueByIdAsync(string id, CancellationToken cancellationToken = default)
+    {
+        var issue = await _manager.Issue.GetAsync(x => x.Id == id, cancellationToken);
+
+        return new IssueDto(
+            issue.Id,
+            issue.ProjectId,
+            issue.Summary,
+            issue.PriorityLevel.ToString(),
+            issue.StartingDate,
+            issue.FixedDate,
+            issue.ResolutionStatus.ToString(),
+            issue.Comment,
+            issue.IsActive);
+
+    }
+
     public async Task<IEnumerable<IssueDto>> GetIssuesByProjectId(string projectId, CancellationToken cancellationToken = default)
     {
         var issues = await _manager.Issue.GetAllAsync(x => x.ProjectId == projectId, cancellationToken);
@@ -53,12 +70,27 @@ public class IssueService : IIssueService
         var issue = await _manager.Issue.GetAsync(x => x.Id == id);
 
         issue.Comment = string.IsNullOrWhiteSpace(comment) ? issue.Comment : comment;
-        
+
         switch (issueStatus)
         {
             case "Unresolved": issue.ResolutionStatus = ResolutionStatus.Unresolved; break;
             case "Fixed": issue.ResolutionStatus = ResolutionStatus.Fixed; break;
         }
+        await _manager.Issue.UpdateAsync(issue, cancellationToken);
+        return issue.ProjectId;
+    }
+
+    public async Task<string> UpdateIssueAsync(UpdateIssueDto updateIssueDto, CancellationToken cancellationToken = default)
+    {
+        var issue = await _manager.Issue.GetAsync(x => x.Id == updateIssueDto.Id, cancellationToken);
+
+        issue.Summary = updateIssueDto.Summary;
+        issue.PriorityLevel = (PriorityLevel)updateIssueDto.PriorityLevel;
+        issue.StartingDate = updateIssueDto.StartingDate;
+        issue.ResolutionStatus = (ResolutionStatus)updateIssueDto.ResolutionStatus;
+        issue.Comment = updateIssueDto.Comment;
+        issue.IsActive = updateIssueDto.IsActive;
+
         await _manager.Issue.UpdateAsync(issue, cancellationToken);
         return issue.ProjectId;
     }
