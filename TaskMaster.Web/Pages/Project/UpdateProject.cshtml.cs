@@ -1,3 +1,4 @@
+using AspNetCoreHero.ToastNotification.Abstractions;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using TaskMaster.Application.Manager;
@@ -5,7 +6,7 @@ using TaskMaster.Shared.Dtos.ProjectDtos;
 
 namespace TaskMaster.Web.Pages.Project;
 
-public class UpdateProjectModel(IServiceManager manager) : PageModel
+public class UpdateProjectModel(IServiceManager manager , INotyfService notyfService) : PageModel
 {
     [BindProperty]
     public UpdateProjectDto UpdateProject { get; set; } = new();
@@ -31,6 +32,7 @@ public class UpdateProjectModel(IServiceManager manager) : PageModel
     public async Task<IActionResult> OnPostAsync()
     {
         await manager.Project.UpdateProjectAsync(UpdateProject, default!);
+        notyfService.Success("Project has been updated successfully.");
         return RedirectToPage("/Project/GetProjects");
     }
 }

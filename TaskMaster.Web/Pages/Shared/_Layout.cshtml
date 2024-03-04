@@ -38,7 +38,7 @@
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/lib/font-awesome/js/fontawesome.min.js"></script>
     <script src="~/js/scripts.js" asp-append-version="true"></script>
-
+    @await Component.InvokeAsync("Notyf")
     @await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>
