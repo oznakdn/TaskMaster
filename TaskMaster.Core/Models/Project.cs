@@ -14,9 +14,8 @@ public class Project : ModelBase
     public DateTime? StartingDate { get; set; }
     public DateTime? EndingDate => StartingDate!.Value.AddDays(Duration);
     public DateTime? FinishedDate { get; set; }
-
     public ProjectStatus ProjectStatus { get; set; } = ProjectStatus.NotStarted;
-    public string? StatusExplation { get; set; }
+    public string? Comment { get; set; }
 
     [BsonIgnore]
     public List<ProjectTask> Tasks { get; set; } = new();
