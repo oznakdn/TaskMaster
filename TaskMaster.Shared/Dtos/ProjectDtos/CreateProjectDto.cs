@@ -1,13 +1,11 @@
 ﻿namespace TaskMaster.Shared.Dtos.ProjectDtos;
 
-public record CreateProjectDto(string Name, string? Description, string? Story, string? Repo, int Duration, DateTime? StartingDate, DateTime? FinishedDate, StatusDto ProjectStatus, string? StatusExplation);
+public record CreateProjectDto(string Name, string? Description, string? Story, string? Repo, int Duration, DateTime? StartingDate, DateTime? FinishedDate, StatusDto ProjectStatus, string? Comment);
 
 public enum StatusDto
 {
-    Pending, // Askida
-    Overdue, // Vadesi gecmis
-    NotStarted, // Henuz baslamadi
-    Active, // Aktif
-    Priority, // Oncelik verildi
-    Canceled // Iptal edildi
+    NotStarted,
+    Active,
+    Finished,
+    Canceled,
 }

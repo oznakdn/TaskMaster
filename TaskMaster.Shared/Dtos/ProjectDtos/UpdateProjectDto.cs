@@ -11,7 +11,7 @@ public class UpdateProjectDto
     public DateTime? StartingDate { get; set; }
     public DateTime? FinishedDate { get; set; }
     public StatusDto ProjectStatus { get; set; }
-    public string? StatusExplation { get; set; }
+    public string? Comment { get; set; }
     public bool IsActive { get; set; }
 }
 
