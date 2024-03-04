@@ -24,7 +24,7 @@ public class UpdateProjectModel(IServiceManager manager) : PageModel
         UpdateProject.StartingDate = project!.StartingDate;
         UpdateProject.FinishedDate = project!.FinishedDate;
         UpdateProject.ProjectStatus = (StatusDto)Enum.Parse(typeof(StatusDto), project!.Status);
-        UpdateProject.StatusExplation = project!.StatusExplation;
+        UpdateProject.Comment = project!.Comment;
         UpdateProject.IsActive = project.IsActive;
     }
 

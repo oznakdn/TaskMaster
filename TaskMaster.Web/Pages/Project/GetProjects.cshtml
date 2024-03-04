@@ -30,22 +30,24 @@
                             </div>
 
                             <div class="col-12 form-group">
-                                <span> Description</span>
-                                <input asp-for="CreateProject.Description" type="text" class="form-control">
-                            </div>
-                            <div class="col-12 form-group">
                                 <span> Repo</span>
                                 <input asp-for="CreateProject.Repo" type="text" class="form-control">
                             </div>
+
+                            <div class="col-12 form-group">
+                                <span> Description</span>
+                                <textarea class="form-control" asp-for="CreateProject.Description" rows="2"></textarea>
+                            </div>
+
                             <div class="col-12 form-group">
                                 <span>Story</span>
                                 <textarea class="form-control" asp-for="CreateProject.Story" rows="3"></textarea>
                             </div>
                             <div class="col-12 form-group">
-                                    <span> Status</span>
-                                    <select asp-for="CreateProject.ProjectStatus" asp-items="Html.GetEnumSelectList<TaskMaster.Shared.Dtos.ProjectDtos.StatusDto>()" class="form-control form-select">
-                                        <option value="">Choose..</option>
-                                    </select>
+                                <span> Status</span>
+                                <select asp-for="CreateProject.ProjectStatus" asp-items="Html.GetEnumSelectList<TaskMaster.Shared.Dtos.ProjectDtos.StatusDto>()" class="form-control form-select">
+                                    <option value="">Choose..</option>
+                                </select>
                             </div>
 
                             <div class="col-12 d-inline-flex">
@@ -63,8 +65,8 @@
                                 </div>
                             </div>
                             <div class="col-12 form-group">
-                                <span> Explation</span>
-                                <textarea class="form-control" asp-for="CreateProject.StatusExplation" rows="3"></textarea>
+                                <span> Comment</span>
+                                <textarea class="form-control" asp-for="CreateProject.Comment" rows="3"></textarea>
                             </div>
                             <div class="col-12 form-group my-3">
 
