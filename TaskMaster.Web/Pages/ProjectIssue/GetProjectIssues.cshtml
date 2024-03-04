@@ -10,7 +10,8 @@
 
 <div class="row justify-content-start">
     <div class="col-3">
-        <button data-bs-toggle="modal" data-bs-target="#createIssueModal" class="btn btn-secondary btn-sm text-end mx-2"><i class="fa-solid fa-square-plus"></i></button>
+        <button data-bs-toggle="modal" data-bs-target="#createIssueModal" class="btn btn-primary btn-sm text-end mx-2"><i class="fa-solid fa-square-plus"></i></button>
+        <a asp-page="/Project/GetProjects" class="btn btn-warning btn-sm"><i class="fa-solid fa-backward"></i><span> Back</span></a>
     </div>
 </div>
 
@@ -147,7 +148,7 @@
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Creating Issue</h5>
+                <h5 class="modal-title" id="exampleModalLabel">New Issue</h5>
                 <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -183,7 +184,7 @@
                             </div>
                             <div class="col-12 form-group">
 
-                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                <button type="button" class="btn btn-warning" data-bs-dismiss="modal">Close</button>
                                 <button type="submit" class="btn btn-primary"><i class="fa-solid fa-floppy-disk"></i> Save</button>
 
                             </div>
