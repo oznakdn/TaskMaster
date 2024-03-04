@@ -34,6 +34,11 @@ public class TaskService : ITaskService
         await _manager.Task.CreateAsync(projectTask, cancellationToken);
     }
 
+    public async Task DeleteAllTaskByProjectIdAsync(string projectId, CancellationToken cancellationToken = default)
+    {
+        await _manager.Task.DeleteAllAsync(x => x.ProjectId == projectId, cancellationToken);
+    }
+
     public async Task DeleteTaskAsync(string id, CancellationToken cancellationToken = default)
     {
         await _manager.Task.DeleteAsync(id, cancellationToken);

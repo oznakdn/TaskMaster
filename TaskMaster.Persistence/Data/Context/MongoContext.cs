@@ -64,6 +64,11 @@ public abstract class MongoContext<T> : IMongoContext<T>
         var count =  await Collection.Find(x => true).CountDocumentsAsync(cancellationToken:cancellationToken);
         return Convert.ToInt32(count);
     }
+
+    public async Task DeleteAllAsync(Expression<Func<T, bool>> filter, CancellationToken cancellationToken = default)
+    {
+        await Collection.DeleteManyAsync(filter,cancellationToken);
+    }
 }
 
 

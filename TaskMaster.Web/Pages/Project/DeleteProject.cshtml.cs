@@ -16,6 +16,8 @@ public class DeleteProjectModel(IServiceManager manager) : PageModel
     public async Task<IActionResult>OnPostAsync()
     {
         await manager.Project.DeleteProjectAsync(Id);
+        await manager.Task.DeleteAllTaskByProjectIdAsync(Id);
+        await manager.Issue.DeleteAllIssueByProjectIdAsync(Id);
         return RedirectToPage("/Project/GetProjects");
     }
 }

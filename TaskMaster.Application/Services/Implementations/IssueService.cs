@@ -96,10 +96,15 @@ public class IssueService : IIssueService
     }
 
     public async Task DeleteIssueAsync(string id, CancellationToken cancellationToken = default)
-    {        
+    {
         await _manager.Issue.DeleteAsync(id, cancellationToken);
     }
 
     public async Task<int> IssueCountAsync(CancellationToken cancellationToken = default) => await _manager.Issue.CountAsync(cancellationToken);
+
+    public async Task DeleteAllIssueByProjectIdAsync(string projectId, CancellationToken cancellationToken = default)
+    {
+        await _manager.Issue.DeleteAllAsync(x => x.ProjectId == projectId, cancellationToken);
+    }
 
 }
