@@ -3,7 +3,8 @@
 
 <div class="row justify-content-start my-5">
     <div class="col-3">
-        <button data-bs-toggle="modal" data-bs-target="#exampleModal" class="btn btn-secondary btn-sm text-end mx-2"><i class="fa-solid fa-square-plus"></i></button>
+        <button data-bs-toggle="modal" data-bs-target="#exampleModal" class="btn btn-primary btn-sm text-end mx-2"><i class="fa-solid fa-square-plus"></i></button>
+        <a asp-page="/Index" class="btn btn-warning btn-sm"><i class="fa-solid fa-house"></i></a>
     </div>
 </div>
 
@@ -100,15 +101,15 @@
                 <span class="text-bg-light text-primary">Ending: </span><span>@item.EndingDate!.Value.ToShortDateString()</span>
                 <hr />
                 <div class="btn-group btn-group-sm my-2 p-1 m-2">
-                    <a target="_blank" href="@item.Repo" class="btn btn-warning"><i class="fa-brands fa-github"></i></a>
-                    <a asp-page="/ProjectTask/GetProjectTasks" asp-route-id="@item.Id" class="btn btn-info"><i class="fa-solid fa-clipboard-check text-black"></i></a>
-                    <a asp-page="/ProjectIssue/GetProjectIssues" asp-route-id="@item.Id" class="btn btn-primary"><i class="fa-regular fa-eye text-black"></i></a>
+                    <a target="_blank" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Repository" href="@item.Repo" class="btn btn-warning"><i class="fa-brands fa-github"></i></a>
+                    <a data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Tasks" asp-page="/ProjectTask/GetProjectTasks" asp-route-id="@item.Id" class="btn btn-info"><i class="fa-solid fa-clipboard-check text-black"></i></a>
+                    <a data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Issues" asp-page="/ProjectIssue/GetProjectIssues" asp-route-id="@item.Id" class="btn btn-primary"><i class="fa-regular fa-eye text-black"></i></a>
                 </div>
                 <hr />
                 <div class="btn-group btn-group-sm my-2 p-1 m-2">
-                    <a asp-page="/Project/UpdateProject" asp-route-id="@item.Id" class="btn btn-warning"><i class="fa-solid fa-pen-to-square text-black"></i></a>
-                    <a asp-page="/Project/DeleteProject" asp-route-id="@item.Id" class="btn btn-danger"><i class="fa-solid fa-trash text-black mx-1"></i></a>
-                    <a asp-page="/Project/GetProjectDetails" asp-route-id="@item.Id" class="btn btn-secondary"><i class="fa-solid fa-circle-info text-black"></i></a>
+                    <a data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Edit" asp-page="/Project/UpdateProject" asp-route-id="@item.Id" class="btn btn-warning"><i class="fa-solid fa-pen-to-square text-black"></i></a>
+                    <a data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Delete" asp-page="/Project/DeleteProject" asp-route-id="@item.Id" class="btn btn-danger"><i class="fa-solid fa-trash text-black mx-1"></i></a>
+                    <a data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Details" asp-page="/Project/GetProjectDetails" asp-route-id="@item.Id" class="btn btn-secondary"><i class="fa-solid fa-circle-info text-black"></i></a>
                 </div>
 
             </div>
@@ -119,4 +120,12 @@
 </div>
 
 
+@section Scripts{
+
+    <script>
+        $(function () {
+            $('[data-bs-toggle="tooltip"]').tooltip();
+        });
+    </script>
+}
 
