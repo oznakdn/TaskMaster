@@ -47,4 +47,19 @@ public class IssueService : IIssueService
             )).ToList();
 
     }
+
+    public async Task<string> UpdateIssueStatusAsync(string id, string issueStatus, string? comment, CancellationToken cancellationToken = default)
+    {
+        var issue = await _manager.Issue.GetAsync(x => x.Id == id);
+
+        issue.Comment = string.IsNullOrWhiteSpace(comment) ? issue.Comment : comment;
+        
+        switch (issueStatus)
+        {
+            case "Unresolved": issue.ResolutionStatus = ResolutionStatus.Unresolved; break;
+            case "Fixed": issue.ResolutionStatus = ResolutionStatus.Fixed; break;
+        }
+        await _manager.Issue.UpdateAsync(issue, cancellationToken);
+        return issue.ProjectId;
+    }
 }

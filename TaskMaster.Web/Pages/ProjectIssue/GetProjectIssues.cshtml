@@ -31,7 +31,7 @@
 
 <div class="row d-flex mx-1">
     <div class="col">
-        <div class="text-center text-bg-secondary text-white my-1 fw-bold">Fixed</div>
+        <div class="text-center text-bg-secondary text-white my-1 fw-bold">Unresolved</div>
         <hr />
 
         @foreach (var item in Model.Issues)
@@ -53,13 +53,29 @@
                         {
                             <span class="badge badge-pill badge-warning">   </span>
                         }
-                        <h5 class="card-title">@item.Summary</h5>
-                        <a asp-page="/ProjectIssue/UpdateIssue" asp-route-id="@item.Id"><i class="fa-solid fa-pen-to-square text-black"></i></a>
-
+                        <p class="card-title">@item.Summary</p>
+                        <hr />
+                        <a asp-page="/ProjectIssue/UpdateIssue" asp-route-id="@item.Id" class="btn btn-light"><i class="fa-solid fa-pen-to-square text-black"></i></a>
+                        <a asp-page="/ProjectIssue/DeleteIssue" asp-route-id="@item.Id" class="btn btn-light"><i class="fa-solid fa-trash text-black"></i></a>
                         <hr />
                         <form method="post">
-                            <input type="hidden" name="taskStatus" value="Progress" />
-                            <button type="submit" class="btn btn-primary btn-sm d-inline-flex" asp-route-taskId="@item.Id" asp-page-handler="UpdateTaskStatus">
+                            <input type="hidden" name="issueStatus" value="Fixed" />
+                            <div class="accordion" id="accordionExample">
+                                <div class="accordion-item">
+                                    <div class="accordion-header">
+                                        <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                                            Comment
+                                        </button>
+                                    </div>
+                                    <div id="collapseOne" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
+                                        <div class="accordion-body">
+                                            <textarea class="form-control my-1" name="comment" rows="2"></textarea>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                            <button type="submit" class="btn btn-primary btn-sm d-inline-flex my-2" asp-route-issueId="@item.Id" asp-page-handler="UpdateIssueStatus">
                                 <i class="fa-solid fa-arrow-right"></i>
                             </button>
                         </form>
@@ -71,7 +87,7 @@
         }
     </div>
     <div class="col">
-        <div class="text-center text-bg-secondary text-white my-1 fw-bold">Unresolved</div>
+        <div class="text-center text-bg-secondary text-white my-1 fw-bold">Fixed</div>
         <hr />
         @foreach (var item in Model.Issues)
         {
@@ -91,24 +107,32 @@
                         {
                             <span class="badge badge-pill badge-warning">   </span>
                         }
-                        <h5 class="card-title">@item.Summary</h5>
-                        <a asp-page="/ProjectTask/UpdateTask" asp-route-id="@item.Id"><i class="fa-solid fa-pen-to-square text-black"></i></a>
-
-
+                        <p class="card-title">@item.Summary</p>
+                        <hr />
+                        <a asp-page="/ProjectIssue/UpdateIssue" asp-route-id="@item.Id" class="btn btn-light"><i class="fa-solid fa-pen-to-square text-black"></i></a>
+                        <a asp-page="/ProjectIssue/DeleteIssue" asp-route-id="@item.Id" class="btn btn-light"><i class="fa-solid fa-trash text-black"></i></a>
                         <hr />
                         <form method="post">
-                            <input type="hidden" name="taskStatus" value="ToDo" />
-                            <button type="submit" class="btn btn-warning btn-sm d-inline-flex" asp-route-taskId="@item.Id" asp-page-handler="UpdateTaskStatus">
+                            <input type="hidden" name="issueStatus" value="Unresolved" />
+                            <div class="accordion" id="accordionExample">
+                                <div class="accordion-item">
+                                    <div class="accordion-header">
+                                        <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                                            Comment
+                                        </button>
+                                    </div>
+                                    <div id="collapseOne" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
+                                        <div class="accordion-body">
+                                            <textarea class="form-control my-1" name="comment" rows="2"></textarea>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                            <button type="submit" class="btn btn-warning btn-sm d-inline-flex my-2" asp-route-issueId="@item.Id" asp-page-handler="UpdateIssueStatus">
                                 <i class="fa-solid fa-arrow-left"></i>
                             </button>
                         </form>
-                        <form method="post">
-                            <input type="hidden" name="taskStatus" value="Review" />
-                            <button type="submit" class="btn btn-primary btn-sm d-inline-flex" asp-route-taskId="@item.Id" asp-page-handler="UpdateTaskStatus">
-                                <i class="fa-solid fa-arrow-right"></i>
-                            </button>
-                        </form>
-
                     </div>
                 </div>
             }
@@ -152,9 +176,9 @@
                                 </div>
                             </div>
 
-                            
+
                             <div class="col-12 form-group">
-                                <span> Commment</span>
+                                <span> Comment</span>
                                 <textarea class="form-control" asp-for="CreateIssue.Comment" rows="3"></textarea>
                             </div>
                             <div class="col-12 form-group">

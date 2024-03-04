@@ -28,4 +28,9 @@ public class GetProjectIssues(IServiceManager manager) : PageModel
         return RedirectToPage("/ProjectIssue/GetProjectIssues", new { id = TempData["projectId"] });
     }
 
+    public async Task<IActionResult> OnPostUpdateIssueStatus(string issueId, string issueStatus, string? comment)
+    {
+        var projectId = await manager.Issue.UpdateIssueStatusAsync(issueId, issueStatus, comment);
+        return RedirectToPage("/ProjectIssue/GetProjectIssues", new { id = projectId });
+    }
 }
