@@ -1,234 +1,120 @@
 ﻿@page "projects"
 @model TaskMaster.Web.Pages.Project.GetProjectsModel
 
-<style>
-    .filterable {
-        margin-top: 15px;
-    }
-
-        .filterable .panel-heading .pull-right {
-            margin-top: -20px;
-        }
-
-        .filterable .filters input[disabled] {
-            background-color: transparent;
-            border: none;
-            cursor: auto;
-            box-shadow: none;
-            padding: 0;
-            height: auto;
-        }
-
-            .filterable .filters input[disabled]::-webkit-input-placeholder {
-                color: #333;
-            }
-
-            .filterable .filters input[disabled]::-moz-placeholder {
-                color: #333;
-            }
-
-            .filterable .filters input[disabled]:-ms-input-placeholder {
-                color: #333;
-            }
-
-    textarea {
-        resize: none;
-    }
-</style>
+<div class="row justify-content-start my-5">
+    <div class="col-3">
+        <button data-bs-toggle="modal" data-bs-target="#exampleModal" class="btn btn-secondary btn-sm text-end mx-2"><i class="fa-solid fa-square-plus"></i></button>
+    </div>
+</div>
 
 
-<div class="row">
-    <div class="panel panel-primary filterable">
-        <div class="panel-heading">
-            <h3 class="panel-title text-center display-6">Projects</h3>
-            <div class="pull-right my-3 text-start">
-                <button class="btn btn-secondary btn-sm btn-filter"><span class="glyphicon glyphicon-filter"></span><i class="fa-solid fa-filter"></i></button>
-                <button id="createButton" class="btn btn-secondary btn-sm text-end mx-2"><span class="glyphicon glyphicon-filter"></span><i class="fa-solid fa-square-plus"></i></button>
+
+<!--Creating-->
+
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">New Project</h5>
+                <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col">
+                        <form method="post">
+                            <div class="col-12 form-group">
+                                <span>Title</span>
+                                <input asp-for="CreateProject.Name" type="text" class="form-control">
+                            </div>
+
+                            <div class="col-12 form-group">
+                                <span> Description</span>
+                                <input asp-for="CreateProject.Description" type="text" class="form-control">
+                            </div>
+                            <div class="col-12 form-group">
+                                <span> Repo</span>
+                                <input asp-for="CreateProject.Repo" type="text" class="form-control">
+                            </div>
+                            <div class="col-12 form-group">
+                                <span>Story</span>
+                                <textarea class="form-control" asp-for="CreateProject.Story" rows="3"></textarea>
+                            </div>
+                            <div class="col-12 form-group">
+                                    <span> Status</span>
+                                    <select asp-for="CreateProject.ProjectStatus" asp-items="Html.GetEnumSelectList<TaskMaster.Shared.Dtos.ProjectDtos.StatusDto>()" class="form-control form-select">
+                                        <option value="">Choose..</option>
+                                    </select>
+                            </div>
+
+                            <div class="col-12 d-inline-flex">
+                                <div class="col-4 form-group">
+                                    <span> Starting</span>
+                                    <input type="date" class="form-control" asp-for="CreateProject.StartingDate">
+                                </div>
+                                <div class="col-4 form-group">
+                                    <span> Duration</span>
+                                    <input type="text" class="form-control" asp-for="CreateProject.Duration">
+                                </div>
+                                <div class="col-4 form-group">
+                                    <span> Finished</span>
+                                    <input type="date" class="form-control" asp-for="CreateProject.FinishedDate">
+                                </div>
+                            </div>
+                            <div class="col-12 form-group">
+                                <span> Explation</span>
+                                <textarea class="form-control" asp-for="CreateProject.StatusExplation" rows="3"></textarea>
+                            </div>
+                            <div class="col-12 form-group my-3">
+
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                <button type="submit" class="btn btn-primary"><i class="fa-solid fa-floppy-disk"></i> Save</button>
+
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
+            </div>
+            <div class="modal-footer">
             </div>
         </div>
-        <table class="table table-bordered text-black">
-            <thead>
-                <tr class="filters bg-secondary">
-                    <th><input type="text" class="form-control" placeholder="Name" disabled></th>
-                    <th><input type="text" class="form-control" placeholder="Starting" disabled></th>
-                    <th><input type="text" class="form-control" placeholder="Duration" disabled></th>
-                    <th><input type="text" class="form-control" placeholder="Ending" disabled></th>
-                    <th><input type="text" class="form-control" placeholder="Status" disabled></th>
-                    <th><input type="text" class="form-control" placeholder="Explation" disabled></th>
-                    <th>ACTIONS</th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach (var item in Model.Projects)
-                {
-                    if (item.IsActive)
-                    {
-                        <tr class="bg-primary">
-                            <td>@item.Name</td>
-                            <td>@item.StartingDate!.Value.ToShortDateString()</td>
-                            <td>@item.Duration day</td>
-                            <td>@item.EndingDate!.Value.ToShortDateString()</td>
-                            <td>@item.Status</td>
-                            <td>@item.StatusExplation</td>
-                            <td>
-                                <a asp-page="/Project/UpdateProject" asp-route-id="@item.Id"><i class="fa-solid fa-pen-to-square text-black"></i></a>
-                                <a asp-page="/Project/DeleteProject" asp-route-id="@item.Id"><i class="fa-solid fa-trash text-black mx-1"></i></a>
-                                <a asp-page="/Project/GetProjectDetails" asp-route-id="@item.Id"><i class="fa-solid fa-circle-info text-black"></i></a>
-                            </td>
-                        </tr>
-                    }
-                    else
-                    {
-                        <tr class="bg-danger">
-                            <td>@item.Name</td>
-                            <td>@item.StartingDate!.Value.ToShortDateString()</td>
-                            <td>@item.Duration day</td>
-                            <td>@item.EndingDate!.Value.ToShortDateString()</td>
-                            <td>@item.Status</td>
-                            <td>@item.StatusExplation</td>
-                            <td>
-                                <a asp-page="/Project/UpdateProject" asp-route-id="@item.Id"><i class="fa-solid fa-pen-to-square text-black"></i></a>
-                                <a asp-page="/Project/DeleteProject" asp-route-id="@item.Id"><i class="fa-solid fa-trash text-black mx-1"></i></a>
-                                <a asp-page="/Project/GetProjectDetails" asp-route-id="@item.Id"><i class="fa-solid fa-circle-info text-black"></i></a>
-                            </td>
-                        </tr>
-                    }
-
-
-                }
-
-            </tbody>
-        </table>
-    </div>
-</div>
-
-<div class="row" style="display:none" id="createRow">
-    <div class="col-12">
-        <form method="post">
-            <div class="col-8 offset-2 d-inline-flex">
-                <div class="col-8 form-group">
-                    <span> Name</span>
-                    <input asp-for="CreateProject.Name" type="text" class="form-control">
-                </div>
-            </div>
-            <div class="col-8 offset-2 d-inline-flex">
-                <div class="col-8 form-group">
-                    <span> Repo</span>
-                    <input asp-for="CreateProject.Repo" type="text" class="form-control">
-                </div>
-            </div>
-            <div class="col-8 offset-2 d-inline-flex mt-1">
-                <div class="col-4 form-group">
-                    <span> Description</span>
-                    <textarea class="form-control" asp-for="CreateProject.Description" rows="3"></textarea>
-                </div>
-                <div class="col-4 form-group mx-1">
-                    <span> Story</span>
-                    <textarea class="form-control" asp-for="CreateProject.Story" rows="3"></textarea>
-                </div>
-            </div>
-            <div class="col-8 offset-2 d-inline-flex mt-1">
-                <div class="col-4 form-group">
-                    <span> Starting</span>
-                    <input type="date" class="form-control" asp-for="CreateProject.StartingDate">
-                </div>
-                <div class="col-4 form-group mx-1">
-                    <span> Duration</span>
-                    <input type="text" class="form-control" asp-for="CreateProject.Duration">
-                </div>
-            </div>
-            <div class="col-8 offset-2 d-inline-flex mt-1">
-                <div class="col-4 form-group">
-                    <span> Finished</span>
-                    <input type="date" class="form-control" asp-for="CreateProject.FinishedDate">
-                </div>
-                <div class="col-4 form-group mx-1">
-                    <span> Status</span>
-                    <select asp-for="CreateProject.ProjectStatus" asp-items="Html.GetEnumSelectList<TaskMaster.Shared.Dtos.ProjectDtos.StatusDto>()" class="form-control form-select">
-                        <option value="">Choose..</option>
-                    </select>
-                </div>
-            </div>
-            <div class="col-8 offset-2 d-inline-flex mt-1">
-                <div class="col-8 form-group mx-1">
-                    <span> Explation</span>
-                    <textarea class="form-control" asp-for="CreateProject.StatusExplation" rows="3"></textarea>
-                </div>
-            </div>
-            <div class="col-8 offset-2 text-center mt-2">
-                <div class="col-8 form-group">
-                    <button type="submit" class="btn btn-success btn-sm"><i class="fa-solid fa-floppy-disk"></i> Save</button>
-                    <button id="cancelButton" type="button" class="btn btn-warning btn-sm mx-3"><i class="fa-solid fa-rectangle-xmark"></i> Cancel</button>
-                </div>
-            </div>
-        </form>
     </div>
 </div>
 
 
+<!--Reading-->
+
+<div class="row">
+    @foreach (var item in Model.Projects)
+    {
+        <div class="col-4">
+            <div class="card p-2">
+                <div class="card-title text-center fw-bold text-success">@item.Name</div>
+                <p>@item.Description</p>
+                <span class="text-bg-light text-primary">Starting: </span><span>@item.StartingDate!.Value.ToShortDateString()</span>
+                <span class="text-bg-light text-primary">Duration: </span><span>@item.Duration day</span>
+                <span class="text-bg-light text-primary">Ending: </span><span>@item.EndingDate!.Value.ToShortDateString()</span>
+                <hr />
+                <div class="btn-group my-2 p-1 m-2">
+                    <a target="_blank" href="@item.Repo" class="btn btn-light"><i class="fa-brands fa-github"></i></a>
+                    <a asp-page="/ProjectTask/GetProjectTasks" asp-route-id="@item.Id" class="btn btn-info"><i class="fa-solid fa-clipboard-check text-black"></i></a>
+                    <a asp-page="/ProjectIssue/GetProjectIssues" asp-route-id="@item.Id" class="btn btn-primary"><i class="fa-regular fa-eye text-black"></i></a>
+                </div>
+                <hr />
+                <div class="btn-group my-2 p-1 m-2">
+                    <a asp-page="/Project/UpdateProject" asp-route-id="@item.Id" class="btn btn-warning"><i class="fa-solid fa-pen-to-square text-black"></i></a>
+                    <a asp-page="/Project/DeleteProject" asp-route-id="@item.Id" class="btn btn-danger"><i class="fa-solid fa-trash text-black mx-1"></i></a>
+                    <a asp-page="/Project/GetProjectDetails" asp-route-id="@item.Id" class="btn btn-secondary"><i class="fa-solid fa-circle-info text-black"></i></a>
+                </div>
+
+            </div>
+
+        </div>
+    }
+
+</div>
 
 
-@section Scripts{
 
-    <script>
-
-        // Filter
-        $(document).ready(function () {
-            $('.filterable .btn-filter').click(function () {
-                var $panel = $(this).parents('.filterable'),
-                    $filters = $panel.find('.filters input'),
-                    $tbody = $panel.find('.table tbody');
-                if ($filters.prop('disabled') == true) {
-                    $filters.prop('disabled', false);
-                    $filters.first().focus();
-                } else {
-                    $filters.val('').prop('disabled', true);
-                    $tbody.find('.no-result').remove();
-                    $tbody.find('tr').show();
-                }
-            });
-
-            $('.filterable .filters input').keyup(function (e) {
-                /* Ignore tab key */
-                var code = e.keyCode || e.which;
-                if (code == '9') return;
-                /* Useful DOM data and selectors */
-                var $input = $(this),
-                    inputContent = $input.val().toLowerCase(),
-                    $panel = $input.parents('.filterable'),
-                    column = $panel.find('.filters th').index($input.parents('th')),
-                    $table = $panel.find('.table'),
-                    $rows = $table.find('tbody tr');
-                /* Dirtiest filter function ever ;) */
-                var $filteredRows = $rows.filter(function () {
-                    var value = $(this).find('td').eq(column).text().toLowerCase();
-                    return value.indexOf(inputContent) === -1;
-                });
-                /* Clean previous no-result if exist */
-                $table.find('tbody .no-result').remove();
-                /* Show all rows, hide filtered ones (never do that outside of a demo ! xD) */
-                $rows.show();
-                $filteredRows.hide();
-                /* Prepend no-result row if all rows are filtered */
-                if ($filteredRows.length === $rows.length) {
-                    $table.find('tbody').prepend($('<tr class="no-result text-center"><td colspan="' + $table.find('.filters th').length + '">No result found</td></tr>'));
-                }
-            });
-        });
-
-        // Create
-
-        $(document).ready(() => {
-
-            $("#createButton").click(() => {
-                $("#createRow").toggle(1000);
-            });
-
-            $("#cancelButton").click(() => {
-                $("#createRow").toggle(1000);
-            });
-        });
-
-
-    </script>
-}
