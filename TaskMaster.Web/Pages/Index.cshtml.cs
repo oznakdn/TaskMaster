@@ -1,9 +1,9 @@
 using AspNetCoreHero.ToastNotification.Abstractions;
-using AspNetCoreHero.ToastNotification.Notyf;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using TaskMaster.Application.Manager;
+using TaskMaster.Shared.Dtos.IssueDtos;
 using TaskMaster.Shared.Dtos.ProjectDtos;
 using TaskMaster.Shared.Dtos.TaskDtos;
 
@@ -16,6 +16,9 @@ namespace TaskMaster.Web.Pages
 
         [BindProperty]
         public CreateTaskDto CreateTask { get; set; }
+
+        [BindProperty]
+        public CreateIssueDto CreateIssue { get; set; }
 
         public SelectList ProjectList { get; set; }
 
@@ -43,6 +46,13 @@ namespace TaskMaster.Web.Pages
         {
             await manager.Task.CreateTaskAsync(CreateTask);
             notyfService.Success("Task has been created successfully.");
+            return RedirectToPage("/Index");
+        }
+
+        public async Task<IActionResult> OnPostCreateIssue()
+        {
+            await manager.Issue.CreateIssueAsync(CreateIssue);
+            notyfService.Success("Issue has been created successfully.");
             return RedirectToPage("/Index");
         }
     }

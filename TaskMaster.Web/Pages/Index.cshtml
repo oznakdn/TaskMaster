@@ -204,7 +204,7 @@
                                 <textarea class="form-control" asp-for="CreateTask.Comment" rows="3"></textarea>
 
                             </div>
-                            <div class="col-12 form-group">
+                            <div class="col-12 form-group my-3">
 
                                 <button type="button" class="btn btn-warning" data-bs-dismiss="modal">Close</button>
                                 <button type="submit" class="btn btn-primary"><i class="fa-solid fa-floppy-disk"></i> Save</button>
@@ -222,7 +222,68 @@
 </div>
 
 
+<!--Create Issue-->
+<div class="modal fade" id="createIssueModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">New Issue</h5>
+                <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col">
+                        <form method="post" asp-page-handler="CreateIssue">
 
+                            <div class="col-12 form-group">
+                                <span> Project</span>
+                                <select asp-for="CreateTask.ProjectId" asp-items="@Model.ProjectList" class="form-control form-select">
+                                    <option value="">Choose..</option>
+                                </select>
+                            </div>
+
+                            <div class="col-12 form-group">
+                                <span> Summary</span>
+                                <input asp-for="CreateIssue.Summary" type="text" class="form-control">
+                            </div>
+
+                            <div class="col-12 d-inline-flex">
+                                <div class="col-6 form-group">
+                                    <span> Status</span>
+                                    <select asp-for="CreateIssue.PriorityLevel" asp-items="Html.GetEnumSelectList<TaskMaster.Shared.Dtos.TaskDtos.PriorityLevelDto>()" class="form-control form-select">
+                                        <option value="">Choose..</option>
+                                    </select>
+                                </div>
+                                <div class="col-6 form-group">
+                                    <span> Starting</span>
+                                    <input type="date" class="form-control" asp-for="CreateIssue.StartingDate">
+                                </div>
+                            </div>
+
+
+                            <div class="col-12 form-group">
+                                <span> Comment</span>
+                                <textarea class="form-control" asp-for="CreateIssue.Comment" rows="3"></textarea>
+                            </div>
+                            <div class="col-12 form-group my-3">
+                                <button type="button" class="btn btn-warning" data-bs-dismiss="modal">Close</button>
+                                <button type="submit" class="btn btn-primary"><i class="fa-solid fa-floppy-disk"></i> Save</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!--Cards-->
 
 <div class="container mt-5 mb-3">
     <div class="row">
@@ -278,7 +339,7 @@
                         </div>
                     </div>
                     <div class="m-5">
-                        <button data-bs-toggle="modal" data-bs-target="#exampleModal" class="btn btn-light btn-sm text-end mx-2 text-black"><i class="fa-solid fa-square-plus"></i></button>
+                        <button data-bs-toggle="modal" data-bs-target="#createIssueModal" class="btn btn-light btn-sm text-end mx-2 text-black"><i class="fa-solid fa-square-plus"></i></button>
                     </div>
                 </div>
                 <div class="mt-3">
