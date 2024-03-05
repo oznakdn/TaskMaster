@@ -76,8 +76,8 @@
 
                                 </div>
                             </div>
-                            <button type="submit" class="btn btn-primary btn-sm d-inline-flex my-2" asp-route-issueId="@item.Id" asp-page-handler="UpdateIssueStatus">
-                                <i class="fa-solid fa-arrow-right"></i>
+                            <button type="submit" class="btn btn-success btn-block btn-sm d-inline-flex my-2" asp-route-issueId="@item.Id" asp-page-handler="UpdateIssueStatus">
+                                Fixed
                             </button>
                         </form>
 
@@ -130,9 +130,10 @@
 
                                 </div>
                             </div>
-                            <button type="submit" class="btn btn-warning btn-sm d-inline-flex my-2" asp-route-issueId="@item.Id" asp-page-handler="UpdateIssueStatus">
-                                <i class="fa-solid fa-arrow-left"></i>
+                            <button type="submit" class="btn btn-danger btn-block d-inline-flex my-2" asp-route-issueId="@item.Id" asp-page-handler="UpdateIssueStatus">
+                                Unresolved
                             </button>
+
                         </form>
                     </div>
                 </div>
