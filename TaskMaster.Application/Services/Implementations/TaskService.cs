@@ -28,7 +28,7 @@ public class TaskService : ITaskService
             StartingDate = createTaskDto.StartingDate,
             PriorityLevel = (PriorityLevel)createTaskDto.PriorityLevel,
             TaskStatus = (ProjectTaskStatus)createTaskDto.TaskStatus,
-            StatusExplation = createTaskDto.StatusExplation
+            Comment = createTaskDto.Comment
         };
 
         await _manager.Task.CreateAsync(projectTask, cancellationToken);
@@ -58,7 +58,7 @@ public class TaskService : ITaskService
             task.EndingDate, 
             task.FinishedDate, 
             task.TaskStatus.ToString(), 
-            task.StatusExplation, 
+            task.Comment, 
             task.IsActive);
     }
 
@@ -78,7 +78,7 @@ public class TaskService : ITaskService
             x.EndingDate,
             x.FinishedDate,
             x.TaskStatus.ToString(),
-            x.StatusExplation,
+            x.Comment,
             x.IsActive
             )).ToList();
     }
@@ -97,7 +97,7 @@ public class TaskService : ITaskService
            x.EndingDate,
            x.FinishedDate,
            x.TaskStatus.ToString(),
-           x.StatusExplation,
+           x.Comment,
            x.IsActive
            )).ToList();
     }
@@ -117,7 +117,7 @@ public class TaskService : ITaskService
             x.EndingDate,
             x.FinishedDate,
             x.TaskStatus.ToString(),
-            x.StatusExplation,
+            x.Comment,
             x.IsActive
             )).ToList();
     }
@@ -135,7 +135,7 @@ public class TaskService : ITaskService
         task.StartingDate = updateTaskDto.StartingDate;
         task.PriorityLevel = (PriorityLevel)updateTaskDto.PriorityLevel;
         task.TaskStatus =(ProjectTaskStatus)updateTaskDto.TaskStatus;
-        task.StatusExplation = updateTaskDto.StatusExplation;
+        task.Comment = updateTaskDto.Comment;
         task.IsActive = updateTaskDto.IsActive;
 
         await _manager.Task.UpdateAsync(task, cancellationToken);

@@ -11,7 +11,7 @@ public class UpdateTaskDto
     public DateTime? EndingDate { get; set; }
     public DateTime? FinishedDate { get; set; }
     public TaskStatusDto TaskStatus { get; set; }
-    public string? StatusExplation { get; set; }
+    public string? Comment { get; set; }
     public bool IsActive { get; set; }
 
 }

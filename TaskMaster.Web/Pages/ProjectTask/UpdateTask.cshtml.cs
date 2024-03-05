@@ -23,7 +23,7 @@ public class UpdateTaskModel(IServiceManager manager) : PageModel
         UpdateTask.FinishedDate = task!.FinishedDate;
         UpdateTask.TaskStatus = (TaskStatusDto)Enum.Parse(typeof(TaskStatusDto), task!.TaskStatus);
         UpdateTask.PriorityLevel = (PriorityLevelDto)Enum.Parse(typeof(PriorityLevelDto), task!.PriorityLevel);
-        UpdateTask.StatusExplation = task!.StatusExplation;
+        UpdateTask.Comment = task!.Comment;
         UpdateTask.IsActive = task.IsActive;
     }
 
