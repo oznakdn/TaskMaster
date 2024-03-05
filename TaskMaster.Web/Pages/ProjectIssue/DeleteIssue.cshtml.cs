@@ -1,10 +1,11 @@
+using AspNetCoreHero.ToastNotification.Abstractions;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using TaskMaster.Application.Manager;
 
 namespace TaskMaster.Web.Pages.ProjectIssue;
 
-public class DeleteIssueModel(IServiceManager manager) : PageModel
+public class DeleteIssueModel(IServiceManager manager, INotyfService notyfService) : PageModel
 {
     [BindProperty]
     public string Id { get; set; }
@@ -20,6 +21,7 @@ public class DeleteIssueModel(IServiceManager manager) : PageModel
     {
         var project = await manager.Issue.GetIssueByIdAsync(Id);
         await manager.Issue.DeleteIssueAsync(Id);
+        notyfService.Success("Issue has been deleted successfully.");
         return RedirectToPage("/ProjectIssue/GetProjectIssues", new { id = project.ProjectId });
     }
 }

@@ -1,3 +1,4 @@
+using AspNetCoreHero.ToastNotification.Abstractions;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using TaskMaster.Application.Manager;
@@ -5,7 +6,7 @@ using TaskMaster.Shared.Dtos.TaskDtos;
 
 namespace TaskMaster.Web.Pages.ProjectTask;
 
-public class UpdateTaskModel(IServiceManager manager) : PageModel
+public class UpdateTaskModel(IServiceManager manager, INotyfService notyfService) : PageModel
 {
     [BindProperty]
     public UpdateTaskDto UpdateTask { get; set; } = new();
@@ -31,6 +32,7 @@ public class UpdateTaskModel(IServiceManager manager) : PageModel
     {
         
         await manager.Task.UpdateTaskAsync(UpdateTask, default!);
+        notyfService.Success("Task has been updated successfully.");
         return RedirectToPage("/ProjectTask/GetProjectTasks", new { id = TempData["projectId"] });
     }
 }
