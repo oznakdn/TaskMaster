@@ -1,11 +1,11 @@
 ﻿@page "/update-issue"
 @model TaskMaster.Web.Pages.ProjectIssue.UpdateIssueModel
 
-<div class="row justify-content-center">
-    <div class="display-6 text-center">Update</div>
-</div>
+
 <div class="row justify-content-center">
     <div class="card">
+        <div class="card-title text-center display-6 mt-2">Update Issue</div>
+        <hr />
         <div class="card-body">
             <form method="post">
                 <input type="hidden" asp-for="UpdateIssue.Id"  />
@@ -24,38 +24,36 @@
                 </div>
 
                 <div class="col-12 form-group p-1">
-                    <span> Title</span>
-                    <input asp-for="UpdateIssue.Summary" type="text" class="form-control">
+                    <span class="text-primary"> Title</span>
+                    <input asp-for="UpdateIssue.Summary" type="text" class="form-control mt-1">
                 </div>
                 <div class="col-12 d-inline-flex">
                     <div class="col-6 form-group p-1">
-                        <span> Priority</span>
-                        <select asp-for="UpdateIssue.PriorityLevel" asp-items="Html.GetEnumSelectList<TaskMaster.Shared.Dtos.TaskDtos.PriorityLevelDto>()" class="form-control form-select">
+                        <span class="text-primary"> Priority</span>
+                        <select asp-for="UpdateIssue.PriorityLevel" asp-items="Html.GetEnumSelectList<TaskMaster.Shared.Dtos.TaskDtos.PriorityLevelDto>()" class="mt-1 form-control form-select">
                             <option value="">Choose..</option>
                         </select>
                     </div>
                     <div class="col-6 form-group p-1">
-                        <span> Resolution</span>
-                        <select asp-for="UpdateIssue.ResolutionStatus" asp-items="Html.GetEnumSelectList<TaskMaster.Shared.Dtos.TaskDtos.ResolutionStatusDto>()" class="form-control form-select">
+                        <span class="text-primary"> Resolution</span>
+                        <select asp-for="UpdateIssue.ResolutionStatus" asp-items="Html.GetEnumSelectList<TaskMaster.Shared.Dtos.TaskDtos.ResolutionStatusDto>()" class="mt-1 form-control form-select">
                             <option value="">Choose..</option>
                         </select>
                     </div>
                 </div>
                 <div class="col-12 d-inline-flex">
                     <div class="col-4 p-1">
-                        <span> Starting</span>
-                        <input type="date" class="form-control" asp-for="UpdateIssue.StartingDate">
+                        <span class="text-primary"> Starting</span>
+                        <input type="date" class="form-control mt-1" asp-for="UpdateIssue.StartingDate">
                     </div>
                 </div>
                 <div class="col-12 form-group p-1">
-                    <span> Explation</span>
-                    <textarea class="form-control" asp-for="UpdateIssue.Comment" rows="3"></textarea>
+                    <span class="text-primary"> Comment</span>
+                    <textarea class="form-control mt-1" asp-for="UpdateIssue.Comment" rows="3"></textarea>
                 </div>
-                <div class="form-group p-1 my-2">
-                    <div class="col-8 form-group">
-                        <button type="submit" class="btn btn-success btn-sm"><i class="fa-solid fa-floppy-disk"></i> Save</button>
-                        <a asp-page="/ProjectIssue/GetProjectIssues" asp-route-id="@Model.ProjectId" class="btn btn-warning btn-sm mx-3"><i class="fa-solid fa-backward"></i><span> Back</span></a>
-                    </div>
+                <div class="col-12 btn-group my-3">
+                    <button type="submit" class="btn btn-success btn-sm text-black"><i class="fa-solid fa-floppy-disk"></i> Save</button>
+                    <a asp-page="/ProjectIssue/GetProjectIssues" asp-route-id="@Model.ProjectId" class="btn btn-warning btn-sm mx-3"><i class="fa-solid fa-ban"></i><span> Cancel</span></a>
                 </div>
             </form>
         </div>

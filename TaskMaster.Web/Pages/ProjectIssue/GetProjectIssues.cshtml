@@ -56,8 +56,8 @@
                         }
                         <p class="card-title">@item.Summary</p>
                         <hr />
-                        <a asp-page="/ProjectIssue/UpdateIssue" asp-route-id="@item.Id" class="btn btn-light"><i class="fa-solid fa-pen-to-square text-black"></i></a>
-                        <a asp-page="/ProjectIssue/DeleteIssue" asp-route-id="@item.Id" class="btn btn-light"><i class="fa-solid fa-trash text-black"></i></a>
+                        <a asp-page="/ProjectIssue/UpdateIssue" asp-route-id="@item.Id" class="btn btn-warning btn-sm"><i class="fa-solid fa-pen-to-square text-black"></i></a>
+                        <a asp-page="/ProjectIssue/DeleteIssue" asp-route-id="@item.Id" class="btn btn-danger btn-sm"><i class="fa-solid fa-trash text-black"></i></a>
                         <hr />
                         <form method="post">
                             <input type="hidden" name="issueStatus" value="Fixed" />
@@ -110,8 +110,8 @@
                         }
                         <p class="card-title">@item.Summary</p>
                         <hr />
-                        <a asp-page="/ProjectIssue/UpdateIssue" asp-route-id="@item.Id" class="btn btn-light"><i class="fa-solid fa-pen-to-square text-black"></i></a>
-                        <a asp-page="/ProjectIssue/DeleteIssue" asp-route-id="@item.Id" class="btn btn-light"><i class="fa-solid fa-trash text-black"></i></a>
+                        <a asp-page="/ProjectIssue/UpdateIssue" asp-route-id="@item.Id" class="btn btn-warning btn-sm"><i class="fa-solid fa-pen-to-square text-black"></i></a>
+                        <a asp-page="/ProjectIssue/DeleteIssue" asp-route-id="@item.Id" class="btn btn-danger btn-sm"><i class="fa-solid fa-trash text-black"></i></a>
                         <hr />
                         <form method="post">
                             <input type="hidden" name="issueStatus" value="Unresolved" />
