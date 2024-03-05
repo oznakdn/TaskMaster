@@ -15,6 +15,9 @@
                         <li class="nav-item">
                             <a class="btn btn-outline-danger btn-sm" asp-route-id="@Model.Project.Id" asp-page="/ProjectIssue/GetProjectIssues"><i class="fa-solid fa-question text-black"></i><span class="text-black"> Issues</span></a>
                         </li>
+                        <li class="nav-item mx-5">
+                            <a asp-page="/Project/GetProjects" class="btn btn-warning btn-sm"><i class="fa-solid fa-ban"></i><span> Cancel</span></a>
+                        </li>
                     </ul>
                 </div>
                 <div class="card-body">
@@ -30,7 +33,5 @@
                 </div>
             </div>
         </div>
-        <div class="col-8 offset-2 mt-3">
-            <a asp-page="/Project/GetProjects" class="btn btn-warning"><i class="fa-solid fa-backward"></i><span> Back</span></a>
-        </div>
+
     </div>

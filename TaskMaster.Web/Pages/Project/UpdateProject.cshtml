@@ -2,84 +2,78 @@
 @model TaskMaster.Web.Pages.Project.UpdateProjectModel
 
 
-<div class="row justify-content-center">
-    <div class="display-6 text-center">Update Project</div>
-</div>
-<div class="row justify-content-center">
-    <div class="col">
-        <form method="post">
-            <input type="hidden" asp-for="UpdateProject.Id" />
 
-            <div class="col-8 offset-2">
-                <div class="form-check form-switch">
-                    <input class="form-check-input" asp-for="UpdateProject.IsActive" type="checkbox" role="switch" id="flexSwitchCheckDefault">
-                    @if (Model.UpdateProject.IsActive == true)
-                    {
-                        <label class="form-check-label" for="flexSwitchCheckDefault">Active</label>
-                    }
-                    else
-                    {
-                        <label class="form-check-label" for="flexSwitchCheckDefault">Passive</label>
-                    }
+<div class="row justify-content-center">
+    <div class="card col">
+        <div class="card-title text-center display-6">Update Project</div>
+        <hr />
+        <div class="card-body">
+            <form method="post">
+                <input type="hidden" asp-for="UpdateProject.Id" />
+                <div class="col-12 d-inline-flex">
+                    <div class="form-check form-switch form-group col-6">
+                        <input class="form-check-input" asp-for="UpdateProject.IsActive" type="checkbox" role="switch" id="flexSwitchCheckDefault">
+                        @if (Model.UpdateProject.IsActive == true)
+                        {
+                            <label class="form-check-label" for="flexSwitchCheckDefault">Active</label>
+                        }
+                        else
+                        {
+                            <label class="form-check-label" for="flexSwitchCheckDefault">Passive</label>
+                        }
+                    </div>
+                    <div class="col-6 form-group">
+                        <span class="text-primary"> Status</span>
+                        <select asp-for="UpdateProject.ProjectStatus" asp-items="Html.GetEnumSelectList<TaskMaster.Shared.Dtos.ProjectDtos.StatusDto>()" class="my-1 form-control form-select">
+                            <option value="">Choose..</option>
+                        </select>
+                    </div>
                 </div>
-            </div>
-            <div class="col-8 offset-2 d-inline-flex">
-                <div class="col-8 form-group">
-                    <span> Name</span>
-                    <input asp-for="UpdateProject.Name" type="text" class="form-control">
+                <div class="col-12 d-inline-flex">
+                    <div class="col-6 form-group">
+                        <span class="text-primary"> Name</span>
+                        <input asp-for="UpdateProject.Name" type="text" class="form-control my-1">
+                    </div>
+                    <div class="col-6 form-group mx-1">
+                        <span> Repo</span>
+                        <input asp-for="UpdateProject.Repo" type="text" class="form-control my-1">
+                    </div>
                 </div>
-            </div>
-            <div class="col-8 offset-2 d-inline-flex">
-                <div class="col-8 form-group">
-                    <span> Repo</span>
-                    <input asp-for="UpdateProject.Repo" type="text" class="form-control">
+                <div class="col-12 d-inline-flex mt-1">
+                    <div class="col-6 form-group">
+                        <span class="text-primary"> Description</span>
+                        <textarea class="form-control my-1" asp-for="UpdateProject.Description" rows="4"></textarea>
+                    </div>
+                    <div class="col-6 form-group mx-1">
+                        <span class="text-primary"> Story</span>
+                        <textarea class="form-control my-1" asp-for="UpdateProject.Story" rows="4"></textarea>
+                    </div>
                 </div>
-            </div>
-            <div class="col-8 offset-2 d-inline-flex mt-1">
-                <div class="col-4 form-group">
-                    <span> Description</span>
-                    <textarea class="form-control" asp-for="UpdateProject.Description" rows="4"></textarea>
+                <div class="col-12 d-inline-flex mt-1">
+                    <div class="col-4 form-group">
+                        <span class="text-primary"> Starting</span>
+                        <input type="date" class="form-control my-1" asp-for="UpdateProject.StartingDate">
+                    </div>
+                    <div class="col-4 form-group mx-1">
+                        <span class="text-primary"> Duration</span>
+                        <input type="text" class="form-control my-1" asp-for="UpdateProject.Duration">
+                    </div>
+                    <div class="col-4 form-group mx-1">
+                        <span class="text-primary"> Finished</span>
+                        <input type="date" class="form-control my-1" asp-for="UpdateProject.FinishedDate">
+                    </div>
                 </div>
-                <div class="col-4 form-group mx-1">
-                    <span> Story</span>
-                    <textarea class="form-control" asp-for="UpdateProject.Story" rows="4"></textarea>
+                <div class="col-12 form-group mt-1">
+                    <span class="text-primary"> Comment</span>
+                    <textarea class="form-control my-1" asp-for="UpdateProject.Comment" rows="4"></textarea>
                 </div>
-            </div>
-            <div class="col-8 offset-2 d-inline-flex mt-1">
-                <div class="col-4 form-group">
-                    <span> Starting</span>
-                    <input type="date" class="form-control" asp-for="UpdateProject.StartingDate">
-                </div>
-                <div class="col-4 form-group mx-1">
-                    <span> Duration</span>
-                    <input type="text" class="form-control" asp-for="UpdateProject.Duration">
-                </div>
-            </div>
-            <div class="col-8 offset-2 d-inline-flex mt-1">
-                <div class="col-4 form-group">
-                    <span> Finished</span>
-                    <input type="date" class="form-control" asp-for="UpdateProject.FinishedDate">
-                </div>
-                <div class="col-4 form-group mx-1">
-                    <span> Status</span>
-                    <select asp-for="UpdateProject.ProjectStatus" asp-items="Html.GetEnumSelectList<TaskMaster.Shared.Dtos.ProjectDtos.StatusDto>()" class="form-control form-select">
-                        <option value="">Choose..</option>
-                    </select>
-                </div>
-            </div>
-            <div class="col-8 offset-2 d-inline-flex mt-1">
-                <div class="col-8 form-group mx-1">
-                    <span> Comment</span>
-                    <textarea class="form-control" asp-for="UpdateProject.Comment" rows="4"></textarea>
-                </div>
-            </div>
-            <div class="col-8 offset-2 mt-2">
-                <div class="col-8 form-group">
+                <div class="col-12 mt-3 btn-group">
                     <button type="submit" class="btn btn-success text-black btn-sm"><i class="fa-solid fa-floppy-disk text-black"></i><span> Save</span></button>
-                    <a asp-page="/Project/GetProjects" class="btn btn-warning btn-sm mx-1"><i class="fa-solid fa-backward"></i><span> Back</span></a>
+                    <a asp-page="/Project/GetProjects" class="btn btn-warning btn-sm mx-1"><i class="fa-solid fa-ban"></i><span> Cancel</span></a>
                 </div>
-            </div>
-        </form>
+            </form>
+
+        </div>
     </div>
 </div>
 

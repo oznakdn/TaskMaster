@@ -3,15 +3,18 @@
 
 
 <div class="row justify-content-center">
-    <div class="col-6 offset-3">
-        <div class="card" style="width: 30rem;">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-title text-center display-6">Confirm Deletion</div>
             <div class="card-body">
-                <h5 class="card-title"><i class="fa-solid fa-circle-exclamation"></i></h5>
-                <p class="card-text">Are you sure that you would like to delete this project?</p>
+                <h5 class="card-text text-center"><i class="fa-solid fa-circle-exclamation"></i> Are you sure?</h5>
+                <p class="text-center">Do you really want to delete these project record? This process cannot be undone.</p>
                 <form method="post">
                     <input type="hidden" asp-for="Id" />
-                    <button type="submit" class="btn btn-success text-black btn-sm"><i class="fa-solid fa-circle-check text-black"></i><span> Delete</span></button>
-                    <a asp-page="/Project/GetProjects" class="btn btn-warning text-black btn-sm"><i class="fa-solid fa-backward"></i></i><span> Back</span></a>
+                    <div class="col-12 form-group btn-group mt-4">
+                        <button type="submit" class="btn btn-danger text-black btn-sm"><i class="fa-solid fa-circle-check text-black"></i><span> Delete</span></button>
+                        <a asp-page="/Project/GetProjects" class="btn btn-warning text-black btn-sm"><i class="fa-solid fa-ban"></i><span> Cancel</span></a>
+                    </div>
                 </form>
             </div>
         </div>
