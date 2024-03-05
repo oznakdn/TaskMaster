@@ -92,13 +92,13 @@
 <div class="row">
     @foreach (var item in Model.Projects)
     {
-        <div class="col-4">
+        <div class="col-4 my-2">
             <div class="card p-2">
                 <div class="card-title text-center fw-bold text-success">@item.Name</div>
-                <p>@item.Description</p>
                 <span class="text-bg-light text-primary">Starting: </span><span>@item.StartingDate!.Value.ToShortDateString()</span>
                 <span class="text-bg-light text-primary">Duration: </span><span>@item.Duration day</span>
                 <span class="text-bg-light text-primary">Ending: </span><span>@item.EndingDate!.Value.ToShortDateString()</span>
+                <span class="text-bg-light text-danger">Remaining: </span><span>@((item.EndingDate - DateTime.Now).Value.TotalDays.ToString("##")) Day</span>
                 <hr />
                 <div class="btn-group btn-group-sm my-2 p-1 m-2">
                     <a target="_blank" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Repository" href="@item.Repo" class="btn btn-warning"><i class="fa-brands fa-github"></i></a>
